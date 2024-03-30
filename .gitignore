@@ -8,3 +8,4 @@ build-MAC/
 build-ANDROID/
 build-IOS/
 build-UNIX/
+buildtest/
