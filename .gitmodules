@@ -1,0 +1,3 @@
+[submodule "thirdparty/eutil"]
+	path = thirdparty/eutil
+	url = https://github.com/RealFaceCode/eutil.git
