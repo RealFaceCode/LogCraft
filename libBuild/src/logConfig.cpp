@@ -103,4 +103,103 @@ namespace lc
         if (it != g_logConfigMap.end())
             it->second.m_sLogDateFormat = std::string(sLogDateFormat);
     }
+
+    void SetLogTypeColorLevel(std::string_view sLogType, bool bColorLevel)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_bColorLevel = bColorLevel;
+    }
+
+    void SetLogTypeColorTime(std::string_view sLogType, bool bColorTime)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_bColorTime = bColorTime;
+    }
+
+    void SetLogTypeColorDate(std::string_view sLogType, bool bColorDate)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_bColorDate = bColorDate;
+    }
+
+    void SetLogTypeColorFunction(std::string_view sLogType, bool bColorFunction)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_bColorFunction = bColorFunction;
+    }
+
+    void SetLogTypeColorLine(std::string_view sLogType, bool bColorLine)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_bColorLine = bColorLine;
+    }
+
+    void SetLogTypeColorMessage(std::string_view sLogType, bool bColorMessage)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_bColorMessage = bColorMessage;
+    }
+
+    void SetLogTypeColorLevel(std::string_view sLogType, std::string_view sColorLevel)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorLevel = std::string(sColorLevel);
+    }
+
+    void SetLogTypeColorTime(std::string_view sLogType, std::string_view sColorTime)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorTime = std::string(sColorTime);
+    }
+
+    void SetLogTypeColorDate(std::string_view sLogType, std::string_view sColorDate)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorDate = std::string(sColorDate);
+    }
+
+    void SetLogTypeColorFunction(std::string_view sLogType, std::string_view sColorFunction)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorFunction = std::string(sColorFunction);
+    }
+
+    void SetLogTypeColorLine(std::string_view sLogType, std::string_view sColorLine)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorLine = std::string(sColorLine);
+    }
+
+    void SetLogTypeColorMessage(std::string_view sLogType, std::string_view sColorMessage)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorMessage = std::string(sColorMessage);
+    }
+
+    void SetLogTypeOrder(std::string_view sLogType, std::queue<LogOrder> logOrder)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_logOrder = logOrder;
+    }
+
+    void SetLogTypeOrder(std::string_view sLogType, std::initializer_list<LogOrder> logOrder)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            for (const auto& order : logOrder)
+                it->second.m_logOrder.push(order);
+    }
 }
