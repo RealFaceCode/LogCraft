@@ -4,6 +4,7 @@
 #include <optional>
 #include <queue>
 #include <initializer_list>
+#include "defines.hpp"
 
 namespace lc
 {
@@ -19,7 +20,7 @@ namespace lc
 
     namespace internal
     {
-        struct LogConfig
+        struct LOGCRAFT_API LogConfig
         {
         public:
             bool m_bLogToFile               = false;
@@ -50,33 +51,33 @@ namespace lc
             std::queue<LogOrder> m_logOrder;
         };
 
-        std::optional<std::reference_wrapper<LogConfig>> GetLogConfig(std::string_view sLogType);
+        LOGCRAFT_API std::optional<std::reference_wrapper<LogConfig>> GetLogConfig(std::string_view sLogType);
     }
 
-    bool AddLogType(std::string_view sLogType);
-    bool RemoveLogType(std::string_view sLogType);
-    void SetLogTypeToFile(std::string_view sLogType, bool bLogToFile);
-    void SetLogTypeToConsole(std::string_view sLogType, bool bLogToConsole);
-    void SetLogTypeTime(std::string_view sLogType, bool bLogTime);
-    void SetLogTypeDate(std::string_view sLogType, bool bLogDate);
-    void SetLogTypeFunction(std::string_view sLogType, bool bLogFunction);
-    void SetLogTypeLine(std::string_view sLogType, bool bLogLine);
-    void SetLogTypeMessage(std::string_view sLogType, bool bLogMessage);
-    void SetLogTypeFilePath(std::string_view sLogType, std::string_view sLogFilePath);
-    void SetLogTypeTimeFormat(std::string_view sLogType, std::string_view sLogTimeFormat);
-    void SetLogTypeDateFormat(std::string_view sLogType, std::string_view sLogDateFormat);
-    void SetLogTypeColorLevel(std::string_view sLogType, bool bColorLevel);
-    void SetLogTypeColorTime(std::string_view sLogType, bool bColorTime);
-    void SetLogTypeColorDate(std::string_view sLogType, bool bColorDate);
-    void SetLogTypeColorFunction(std::string_view sLogType, bool bColorFunction);
-    void SetLogTypeColorLine(std::string_view sLogType, bool bColorLine);
-    void SetLogTypeColorMessage(std::string_view sLogType, bool bColorMessage);
-    void SetLogTypeColorLevel(std::string_view sLogType, std::string_view sColorLevel);
-    void SetLogTypeColorTime(std::string_view sLogType, std::string_view sColorTime);
-    void SetLogTypeColorDate(std::string_view sLogType, std::string_view sColorDate);
-    void SetLogTypeColorFunction(std::string_view sLogType, std::string_view sColorFunction);
-    void SetLogTypeColorLine(std::string_view sLogType, std::string_view sColorLine);
-    void SetLogTypeColorMessage(std::string_view sLogType, std::string_view sColorMessage);
-    void SetLogTypeOrder(std::string_view sLogType, std::queue<LogOrder> logOrder);
-    void SetLogTypeOrder(std::string_view sLogType, std::initializer_list<LogOrder> logOrder);
+    LOGCRAFT_API bool AddLogType(std::string_view sLogType);
+    LOGCRAFT_API bool RemoveLogType(std::string_view sLogType);
+    LOGCRAFT_API void SetLogTypeToFile(std::string_view sLogType, bool bLogToFile);
+    LOGCRAFT_API void SetLogTypeToConsole(std::string_view sLogType, bool bLogToConsole);
+    LOGCRAFT_API void SetLogTypeTime(std::string_view sLogType, bool bLogTime);
+    LOGCRAFT_API void SetLogTypeDate(std::string_view sLogType, bool bLogDate);
+    LOGCRAFT_API void SetLogTypeFunction(std::string_view sLogType, bool bLogFunction);
+    LOGCRAFT_API void SetLogTypeLine(std::string_view sLogType, bool bLogLine);
+    LOGCRAFT_API void SetLogTypeMessage(std::string_view sLogType, bool bLogMessage);
+    LOGCRAFT_API void SetLogTypeFilePath(std::string_view sLogType, std::string_view sLogFilePath);
+    LOGCRAFT_API void SetLogTypeTimeFormat(std::string_view sLogType, std::string_view sLogTimeFormat);
+    LOGCRAFT_API void SetLogTypeDateFormat(std::string_view sLogType, std::string_view sLogDateFormat);
+    LOGCRAFT_API void SetLogTypeColorLevel(std::string_view sLogType, bool bColorLevel);
+    LOGCRAFT_API void SetLogTypeColorTime(std::string_view sLogType, bool bColorTime);
+    LOGCRAFT_API void SetLogTypeColorDate(std::string_view sLogType, bool bColorDate);
+    LOGCRAFT_API void SetLogTypeColorFunction(std::string_view sLogType, bool bColorFunction);
+    LOGCRAFT_API void SetLogTypeColorLine(std::string_view sLogType, bool bColorLine);
+    LOGCRAFT_API void SetLogTypeColorMessage(std::string_view sLogType, bool bColorMessage);
+    LOGCRAFT_API void SetLogTypeColorLevel(std::string_view sLogType, std::string_view sColorLevel);
+    LOGCRAFT_API void SetLogTypeColorTime(std::string_view sLogType, std::string_view sColorTime);
+    LOGCRAFT_API void SetLogTypeColorDate(std::string_view sLogType, std::string_view sColorDate);
+    LOGCRAFT_API void SetLogTypeColorFunction(std::string_view sLogType, std::string_view sColorFunction);
+    LOGCRAFT_API void SetLogTypeColorLine(std::string_view sLogType, std::string_view sColorLine);
+    LOGCRAFT_API void SetLogTypeColorMessage(std::string_view sLogType, std::string_view sColorMessage);
+    LOGCRAFT_API void SetLogTypeOrder(std::string_view sLogType, std::queue<LogOrder> logOrder);
+    LOGCRAFT_API void SetLogTypeOrder(std::string_view sLogType, std::initializer_list<LogOrder> logOrder);
 }
