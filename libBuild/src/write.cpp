@@ -180,7 +180,7 @@ namespace lc::internal
 
     LOGCRAFT_API void WriteToConsole(std::string_view sMessage)
     {
-
+        std::printf("%s", sMessage.data());
     }
 
     LOGCRAFT_API void WriteToFile(std::string_view sFileName, std::string_view sMessage)
