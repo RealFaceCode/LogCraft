@@ -89,6 +89,22 @@ namespace lc::internal
         }
     }
 
+    void FillLabelToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sLabel)
+    {
+        if(sLabel == "")
+            return;
+
+        if(config.m_bColorLabel)
+        {
+        }
+
+        buffer.sputn(sLabel.data(), sLabel.size());
+
+        if(config.m_bColorLabel)
+        {
+        }
+    }
+
     void FillMessageToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sMessage)
     {
         if(!config.m_bLogMessage)
@@ -105,18 +121,9 @@ namespace lc::internal
         }
     }
 
-#pragma endregion FillBuffer
-
-    LOGCRAFT_API std::string BuildMessage(std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine)
+    void FillBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine)
     {
-        auto configOpt = internal::GetLogConfig(sLevel);
-        if(!configOpt.has_value())
-            return "";
-
-        auto& config = configOpt.value().get();
         auto& oder = config.m_logOrder;
-
-        std::stringbuf buffer;
 
         for(auto& order : oder)
         {
@@ -135,7 +142,10 @@ namespace lc::internal
                     FillLineToBuffer(buffer, config, nLine);
                     break;
                 case LogOrder::Level:
-                    FillLevelToBuffer(buffer, config, sLabel);
+                    FillLevelToBuffer(buffer, config, sLevel);
+                    break;
+                case LogOrder::Label:
+                    FillLabelToBuffer(buffer, config, sLabel);
                     break;
                 case LogOrder::Message:
                     FillMessageToBuffer(buffer, config, sMessage);
@@ -144,6 +154,27 @@ namespace lc::internal
                     break;
             }
         }
+    }
+
+#pragma endregion FillBuffer
+
+    LOGCRAFT_API std::string CombineArguments(std::string_view sMessage, std::format_args args)
+    {
+        return std::vformat(sMessage, args);
+    }
+
+    LOGCRAFT_API std::string BuildMessage(std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine)
+    {
+        auto configOpt = internal::GetLogConfig(sLevel);
+        if(!configOpt.has_value())
+            return "";
+
+        auto& config = configOpt.value().get();
+        auto& oder = config.m_logOrder;
+
+        std::stringbuf buffer;
+        FillBuffer(buffer, config, sLevel, sLabel, sMessage, sFunction, sFile, nLine);
+
         return buffer.str();
     }
 
