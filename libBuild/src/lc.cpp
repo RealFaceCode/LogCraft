@@ -1,10 +1,14 @@
 #include "lc.hpp"
 #include "logConfig.hpp"
+#include "logcraftConfig.hpp"
 
 namespace lc
 {
     LOGCRAFT_API void Init()
     {
+        auto logCraftConfig = internal::GetLogCraftConfig();
+        logCraftConfig = std::make_shared<internal::LogCraftConfig>();
+
         AddLogType("INFO");
         AddLogType("DEBUG");
         AddLogType("WARNING");
