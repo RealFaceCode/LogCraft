@@ -111,6 +111,13 @@ namespace lc
             it->second.m_bColorLevel = bColorLevel;
     }
 
+    LOGCRAFT_API void SetLogTypeColorLabel(std::string_view sLogType, bool bColorLabel)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_bColorLabel = bColorLabel;
+    }
+
     LOGCRAFT_API void SetLogTypeColorTime(std::string_view sLogType, bool bColorTime)
     {
         auto it = g_logConfigMap.find(std::string(sLogType));
@@ -151,6 +158,13 @@ namespace lc
         auto it = g_logConfigMap.find(std::string(sLogType));
         if (it != g_logConfigMap.end())
             it->second.m_sColorLevel = std::string(sColorLevel);
+    }
+
+    LOGCRAFT_API void SetLogTypeColorLabel(std::string_view sLogType, std::string_view sColorLabel)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorLabel = std::string(sColorLabel);
     }
 
     LOGCRAFT_API void SetLogTypeColorTime(std::string_view sLogType, std::string_view sColorTime)

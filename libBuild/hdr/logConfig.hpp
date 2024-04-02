@@ -15,6 +15,7 @@ namespace lc
         Function,
         Line,
         Level,
+        Label,
         Message
     };
 
@@ -36,12 +37,14 @@ namespace lc
             std::string m_sLogDateFormat    = "%d-%m-%Y";
 
             bool m_bColorLevel              = true;
+            bool m_bColorLabel              = false;
             bool m_bColorTime               = false;
             bool m_bColorDate               = false;
             bool m_bColorFunction           = false;
             bool m_bColorLine               = false;
             bool m_bColorMessage            = false;
             std::string m_sColorLevel       = "";
+            std::string m_sColorLabel       = "";
             std::string m_sColorTime        = "";
             std::string m_sColorDate        = "";
             std::string m_sColorFunction    = "";
@@ -67,12 +70,14 @@ namespace lc
     LOGCRAFT_API void SetLogTypeTimeFormat(std::string_view sLogType, std::string_view sLogTimeFormat);
     LOGCRAFT_API void SetLogTypeDateFormat(std::string_view sLogType, std::string_view sLogDateFormat);
     LOGCRAFT_API void SetLogTypeColorLevel(std::string_view sLogType, bool bColorLevel);
+    LOGCRAFT_API void SetLogTypeColorLabel(std::string_view sLogType, bool bColorLabel);
     LOGCRAFT_API void SetLogTypeColorTime(std::string_view sLogType, bool bColorTime);
     LOGCRAFT_API void SetLogTypeColorDate(std::string_view sLogType, bool bColorDate);
     LOGCRAFT_API void SetLogTypeColorFunction(std::string_view sLogType, bool bColorFunction);
     LOGCRAFT_API void SetLogTypeColorLine(std::string_view sLogType, bool bColorLine);
     LOGCRAFT_API void SetLogTypeColorMessage(std::string_view sLogType, bool bColorMessage);
     LOGCRAFT_API void SetLogTypeColorLevel(std::string_view sLogType, std::string_view sColorLevel);
+    LOGCRAFT_API void SetLogTypeColorLabel(std::string_view sLogType, std::string_view sColorLabel);
     LOGCRAFT_API void SetLogTypeColorTime(std::string_view sLogType, std::string_view sColorTime);
     LOGCRAFT_API void SetLogTypeColorDate(std::string_view sLogType, std::string_view sColorDate);
     LOGCRAFT_API void SetLogTypeColorFunction(std::string_view sLogType, std::string_view sColorFunction);
