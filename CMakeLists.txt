@@ -31,6 +31,7 @@ if(NOT TARGET ${PROJECT_NAME})
     target_include_directories(${PROJECT_NAME} PUBLIC libBuild/hdr)
     target_include_directories(${PROJECT_NAME} PRIVATE thirdparty/eutil/hdr)
     target_link_libraries(${PROJECT_NAME} PRIVATE eUtil)
+    target_compile_definitions(${PROJECT_NAME} PRIVATE LOGCRAFT_EXPORTS)
 endif()
 
 message(STATUS "LogCraft build examples: " ${BUILD_EXAMPLES})
