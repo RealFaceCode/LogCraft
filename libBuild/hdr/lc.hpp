@@ -1,6 +1,7 @@
 #pragma once
+#include "defines.hpp"
 
 namespace lc
 {
-    void Init();
+    LOGCRAFT_API void Init();
 }

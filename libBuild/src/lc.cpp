@@ -3,7 +3,7 @@
 
 namespace lc
 {
-    void Init()
+    LOGCRAFT_API void Init()
     {
         AddLogType("INFO");
         AddLogType("DEBUG");
