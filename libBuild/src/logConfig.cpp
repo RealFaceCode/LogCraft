@@ -7,7 +7,7 @@ namespace lc
     
     namespace internal
     {
-        std::optional<const LogConfig&> GetLogConfig(std::string_view sLogType)
+        std::optional<std::reference_wrapper<LogConfig>> GetLogConfig(std::string_view sLogType)
         {
             auto it = g_logConfigMap.find(std::string(sLogType));
             if (it != g_logConfigMap.end())

@@ -50,7 +50,7 @@ namespace lc
             std::queue<LogOrder> m_logOrder;
         };
 
-        std::optional<const LogConfig&> GetLogConfig(std::string_view sLogType);
+        std::optional<std::reference_wrapper<LogConfig>> GetLogConfig(std::string_view sLogType);
     }
 
     bool AddLogType(std::string_view sLogType);
