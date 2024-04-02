@@ -188,7 +188,7 @@ namespace lc
             it->second.m_sColorMessage = std::string(sColorMessage);
     }
 
-    LOGCRAFT_API void SetLogTypeOrder(std::string_view sLogType, std::queue<LogOrder> logOrder)
+    LOGCRAFT_API void SetLogTypeOrder(std::string_view sLogType, std::vector<LogOrder> logOrder)
     {
         auto it = g_logConfigMap.find(std::string(sLogType));
         if (it != g_logConfigMap.end())
@@ -199,7 +199,11 @@ namespace lc
     {
         auto it = g_logConfigMap.find(std::string(sLogType));
         if (it != g_logConfigMap.end())
-            for (const auto& order : logOrder)
-                it->second.m_logOrder.push(order);
+        {
+            it->second.m_logOrder.clear();
+            it->second.m_logOrder.insert(it->second.m_logOrder.end(), logOrder.begin(), logOrder.end());
+            
+        }
+            
     }
 }

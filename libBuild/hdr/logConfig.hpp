@@ -2,7 +2,7 @@
 
 #include <string>
 #include <optional>
-#include <queue>
+#include <vector>
 #include <initializer_list>
 #include "defines.hpp"
 
@@ -48,7 +48,7 @@ namespace lc
             std::string m_sColorLine        = "";
             std::string m_sColorMessage     = "";
 
-            std::queue<LogOrder> m_logOrder;
+            std::vector<LogOrder> m_logOrder;
         };
 
         LOGCRAFT_API std::optional<std::reference_wrapper<LogConfig>> GetLogConfig(std::string_view sLogType);
@@ -78,6 +78,6 @@ namespace lc
     LOGCRAFT_API void SetLogTypeColorFunction(std::string_view sLogType, std::string_view sColorFunction);
     LOGCRAFT_API void SetLogTypeColorLine(std::string_view sLogType, std::string_view sColorLine);
     LOGCRAFT_API void SetLogTypeColorMessage(std::string_view sLogType, std::string_view sColorMessage);
-    LOGCRAFT_API void SetLogTypeOrder(std::string_view sLogType, std::queue<LogOrder> logOrder);
+    LOGCRAFT_API void SetLogTypeOrder(std::string_view sLogType, std::vector<LogOrder> logOrder);
     LOGCRAFT_API void SetLogTypeOrder(std::string_view sLogType, std::initializer_list<LogOrder> logOrder);
 }
