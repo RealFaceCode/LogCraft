@@ -22,12 +22,10 @@ namespace lc
     {
         auto [it, succes] = g_logConfigMap.try_emplace(std::string(sLogType), internal::LogConfig());
 
-        auto lcConfig = internal::GetLogCraftConfig();
-        if(!lcConfig)
-            return false;
+        auto& lcConfig = internal::GetLogCraftConfig();
 
-        if (lcConfig->m_nCurrentMaxLevelWidth < sLogType.size())
-            lcConfig->m_nCurrentMaxLevelWidth = sLogType.size();
+        if (lcConfig.m_nCurrentMaxLevelWidth < sLogType.size())
+            lcConfig.m_nCurrentMaxLevelWidth = sLogType.size();
 
         return succes;
     }

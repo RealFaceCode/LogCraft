@@ -14,7 +14,7 @@ namespace lc
             bool m_bAllignLeft = true;
         };
 
-        LOGCRAFT_API std::shared_ptr<LogCraftConfig>& GetLogCraftConfig();
+        LOGCRAFT_API LogCraftConfig& GetLogCraftConfig();
     }   
 
     LOGCRAFT_API void SetAllignLevel(bool bAllignLeft);

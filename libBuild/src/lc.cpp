@@ -7,9 +7,6 @@ namespace lc
 {
     LOGCRAFT_API void Init()
     {
-        auto& lcConfig = internal::GetLogCraftConfig();
-        lcConfig = std::make_shared<internal::LogCraftConfig>();
-
         AddLogType("INFO");
         AddLogType("DEBUG");
         AddLogType("WARNING");

@@ -4,9 +4,9 @@ namespace lc
 {
     namespace internal
     {
-        std::shared_ptr<LogCraftConfig> g_logCraftConfig = nullptr;
+        LogCraftConfig g_logCraftConfig;
 
-        LOGCRAFT_API std::shared_ptr<LogCraftConfig>& GetLogCraftConfig()
+        LOGCRAFT_API LogCraftConfig& GetLogCraftConfig()
         {
             return g_logCraftConfig;
         }
@@ -14,9 +14,7 @@ namespace lc
 
     LOGCRAFT_API void SetAllignLevel(bool bAllignLeft)
     {
-        auto config = internal::GetLogCraftConfig();
-        if(config)
-            config->m_bAllignLeft = bAllignLeft;
+        internal::g_logCraftConfig.m_bAllignLeft = bAllignLeft;
     }
 
 }

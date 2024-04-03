@@ -90,10 +90,10 @@ namespace lc::internal
 
         buffer.sputn(sLevel.data(), sLevel.size());
 
-        auto lcConfig = internal::GetLogCraftConfig();
-        if(lcConfig && lcConfig->m_bAllignLeft)
+        auto& lcConfig = internal::GetLogCraftConfig();
+        if(lcConfig.m_bAllignLeft)
         {
-            auto nMaxLevelWidth = lcConfig->m_nCurrentMaxLevelWidth;
+            auto nMaxLevelWidth = lcConfig.m_nCurrentMaxLevelWidth;
             auto nLevelWidth = sLevel.size();
             auto nDiff = nMaxLevelWidth - nLevelWidth;
 
