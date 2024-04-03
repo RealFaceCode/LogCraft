@@ -1,6 +1,7 @@
 #include "lc.hpp"
 #include "logConfig.hpp"
 #include "logcraftConfig.hpp"
+#include "logColor.hpp"
 
 namespace lc
 {
@@ -24,10 +25,13 @@ namespace lc
             LogOrder::Line, 
             LogOrder::Message
         };
-        SetLogTypeOrder("INFO", logOrder);
-        SetLogTypeOrder("DEBUG", logOrder);
-        SetLogTypeOrder("WARNING", logOrder);
-        SetLogTypeOrder("ERROR", logOrder);
-        SetLogTypeOrder("CRITICAL", logOrder);
+
+        SetLogTypeOrderToAll(logOrder);
+
+        SetLogTypeColorLevel("INFO", LogColor::White);
+        SetLogTypeColorLevel("DEBUG", LogColor::Green);
+        SetLogTypeColorLevel("WARNING", LogColor::Yellow);
+        SetLogTypeColorLevel("ERROR", LogColor::Red);
+        SetLogTypeColorLevel("CRITICAL", LogColor::LightMagenta, {LogEffect::Blink});
     }
 }
