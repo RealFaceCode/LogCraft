@@ -17,4 +17,8 @@ namespace lc
         internal::g_logCraftConfig.m_bAllignLeft = bAllignLeft;
     }
 
+    LOGCRAFT_API void SetMaxLevelWidth(std::size_t nWidth)
+    {
+        internal::g_logCraftConfig.m_nCurrentMaxLevelWidth = nWidth;
+    }
 }

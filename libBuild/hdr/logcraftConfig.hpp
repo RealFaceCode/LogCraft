@@ -18,4 +18,5 @@ namespace lc
     }   
 
     LOGCRAFT_API void SetAllignLevel(bool bAllignLeft);
+    LOGCRAFT_API void SetMaxLevelWidth(std::size_t nWidth);
 }
