@@ -4,10 +4,18 @@
 
 #include "defines.hpp"
 
-namespace lc::internal
+namespace lc
 {
-    struct LOGCRAFT_API LogCraftConfig
-    {};
+    namespace internal
+    {
+        struct LOGCRAFT_API LogCraftConfig
+        {
+            std::size_t m_nCurrentMaxLevelWidth = 0;
+            bool m_bAllignLeft = true;
+        };
 
-    LOGCRAFT_API std::shared_ptr<LogCraftConfig> GetLogCraftConfig();
+        LOGCRAFT_API std::shared_ptr<LogCraftConfig>& GetLogCraftConfig();
+    }   
+
+    LOGCRAFT_API void SetAllignLevel(bool bAllignLeft);
 }

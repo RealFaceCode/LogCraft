@@ -1,11 +1,22 @@
 #include "logcraftConfig.hpp"
 
-namespace lc::internal
+namespace lc
 {
-    std::shared_ptr<LogCraftConfig> g_logCraftConfig = nullptr;
-
-    std::shared_ptr<LogCraftConfig> GetLogCraftConfig()
+    namespace internal
     {
-        return g_logCraftConfig;
+        std::shared_ptr<LogCraftConfig> g_logCraftConfig = nullptr;
+
+        LOGCRAFT_API std::shared_ptr<LogCraftConfig>& GetLogCraftConfig()
+        {
+            return g_logCraftConfig;
+        }
     }
+
+    LOGCRAFT_API void SetAllignLevel(bool bAllignLeft)
+    {
+        auto config = internal::GetLogCraftConfig();
+        if(config)
+            config->m_bAllignLeft = bAllignLeft;
+    }
+
 }
