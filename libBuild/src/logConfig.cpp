@@ -1,6 +1,8 @@
 #include "logConfig.hpp"
 #include <unordered_map>
 
+#include "logCraftConfig.hpp"
+
 namespace lc
 {
     std::unordered_map<std::string, internal::LogConfig> g_logConfigMap;
@@ -19,6 +21,14 @@ namespace lc
     LOGCRAFT_API bool AddLogType(std::string_view sLogType)
     {
         auto [it, succes] = g_logConfigMap.try_emplace(std::string(sLogType), internal::LogConfig());
+
+        auto lcConfig = internal::GetLogCraftConfig();
+        if(!lcConfig)
+            return false;
+
+        if (lcConfig->m_nCurrentMaxLevelWidth < sLogType.size())
+            lcConfig->m_nCurrentMaxLevelWidth = sLogType.size();
+
         return succes;
     }
 
