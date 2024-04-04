@@ -220,11 +220,6 @@ namespace lc::internal
 
 #pragma endregion FillBuffer
 
-    LOGCRAFT_API std::string CombineArguments(std::string_view sMessage, std::format_args args)
-    {
-        return std::vformat(sMessage, args);
-    }
-
     LOGCRAFT_API std::string BuildMessage(std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine)
     {
         auto configOpt = internal::GetLogConfig(sLevel);

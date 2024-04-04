@@ -15,21 +15,18 @@ namespace lc
         std::string m_sLevel                    = "";
         std::string m_sLabel                    = "";
         std::source_location m_sourceLocation   = {};
-        std::format_args m_args                 = {};
     };
 
     namespace internal
     {   
         template<typename... Args>
-        LogMsg CreateLogMsg(std::string_view strMsg, std::string_view strLevel, std::string_view strLabel, const std::source_location& m_sourceLocation, Args&&... args)
+        LogMsg CreateLogMsg(std::string_view strMsg, std::string_view strLevel, std::string_view strLabel, const std::source_location& m_sourceLocation, const Args&... args)
         {
-            return LogMsg
-            {
-                .m_strMsg = strMsg.data(),
+            return LogMsg {
+                .m_strMsg = std::vformat(strMsg, std::make_format_args(args...)),
                 .m_sLevel = strLevel.data(),
                 .m_sLabel = strLabel.data(),
                 .m_sourceLocation = m_sourceLocation,
-                .m_args = std::make_format_args(std::forward<Args>(args)...)
             };
         }
     }
