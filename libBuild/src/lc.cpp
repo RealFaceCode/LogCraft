@@ -16,6 +16,7 @@ namespace lc
         std::initializer_list<LogOrder> logOrder = 
         {
             LogOrder::Level,
+            LogOrder::Label,
             LogOrder::Time,
             LogOrder::Date,
             LogOrder::Function, 
