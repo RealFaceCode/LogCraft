@@ -2,7 +2,9 @@
 
 #include <cstdint>
 
+#include "threadPool.hpp"
 #include "defines.hpp"
+#include "logMsg.hpp"
 
 namespace lc
 {
@@ -15,6 +17,8 @@ namespace lc
 
         LOGCRAFT_API void SartMsgServer();
         LOGCRAFT_API void StopMsgServer();
+
+        std::shared_ptr<eutil::ThreadPool<LogMsg>> LOGCRAFT_API GetThreadPool();
     }
 
     LOGCRAFT_API void SetMaxThreads(std::size_t nThreads);

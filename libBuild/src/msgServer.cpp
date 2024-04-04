@@ -2,19 +2,17 @@
 
 #include <memory>
 
-#include "hdr/ThreadPool.hpp"
-
 namespace lc
 {
     namespace internal
     {
         MsgServerConfig g_msgServerConfig;
-        std::shared_ptr<eutil::ThreadPool<std::string>> g_threadPool = nullptr; //TODO: write a specific struct for msgs
+        std::shared_ptr<eutil::ThreadPool<LogMsg>> g_threadPool = nullptr;
 
         LOGCRAFT_API void SartMsgServer()
         {
             if(!g_threadPool)
-                g_threadPool = std::make_shared<eutil::ThreadPool<std::string>>([](const std::string& data) -> std::optional<int> 
+                g_threadPool = std::make_shared<eutil::ThreadPool<LogMsg>>([](const LogMsg& data) -> std::optional<int> 
                 {
                     return std::nullopt;
                 }, g_msgServerConfig.m_nMaxThreads);
@@ -26,6 +24,11 @@ namespace lc
         {
             if(g_threadPool)
                 g_threadPool->stop();
+        }
+
+        std::shared_ptr<eutil::ThreadPool<LogMsg>> LOGCRAFT_API GetThreadPool()
+        {
+            return g_threadPool;
         }
     }
 
