@@ -13,36 +13,16 @@ namespace lc
         AddLogType("ERROR");
         AddLogType("CRITICAL");
 
-        std::initializer_list<LogOrder> logOrder = 
-        {
-            LogOrder::Level,
-            LogOrder::Label,
-            LogOrder::Time,
-            LogOrder::Date,
-            LogOrder::Function, 
-            LogOrder::Line, 
-            LogOrder::Message
-        };
+        auto& orderSet = internal::GetAvailableOrders();
+        orderSet = {"{LEVEL}", "{LABEL}", "{TIME}", "{DATE}", "{FUNC}", "{LINE}", "{MSG}"};
 
-        SetLogTypeOrderToAll(logOrder);
+        SetFormatTrimToAll("] }");
+        SetFormatToAll("[{LEVEL}] [LABEL:{LABEL}] [{TIME} {DATE}] [{FUNC}] [LINE:{LINE}] {MSG}");
 
         SetLogTypeColorLevel("INFO", LogColor::White);
         SetLogTypeColorLevel("DEBUG", LogColor::Green);
         SetLogTypeColorLevel("WARNING", LogColor::Yellow);
         SetLogTypeColorLevel("ERROR", LogColor::Red);
         SetLogTypeColorLevel("CRITICAL", LogColor::LightMagenta, {LogEffect::Blink});
-
-        SetLogTypeStringBeforeLevelToAll("[");
-        SetLogTypeStringAfterLevelToAll("]");
-        SetLogTypeStringBeforeMessageToAll(" ");
-
-        SetLogTypeStringBeforeLabelToAll("[Label:");
-        SetLogTypeStringAfterLabelToAll("] ");
-        SetLogTypeStringAfterTimeToAll(" ");
-        SetLogTypeStringAfterDateToAll(" ");
-        SetLogTypeStringBeforeFunctionToAll(" ");
-        SetLogTypeStringAfterFunctionToAll(" ");
-        SetLogTypeStringBeforeLineToAll("Line:");
-        SetLogTypeStringAfterLineToAll(" ");
     }
 }

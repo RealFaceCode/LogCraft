@@ -4,6 +4,8 @@
 #include <optional>
 #include <vector>
 #include <initializer_list>
+#include <set>
+
 #include "defines.hpp"
 #include "logColor.hpp"
 
@@ -68,10 +70,44 @@ namespace lc
             std::string m_sALine            = "";
             std::string m_sAMessage         = "";
 
+            std::string m_sFormatTrim       = "";
             std::vector<LogOrder> m_logOrder;
         };
 
         LOGCRAFT_API std::optional<std::reference_wrapper<LogConfig>> GetLogConfig(std::string_view sLogType);
+        LOGCRAFT_API std::set<std::string>& GetAvailableOrders();
+
+        LOGCRAFT_API void SetLogTypeStringBeforeLevel(std::string_view sLogType, std::string_view sBLevel);
+        LOGCRAFT_API void SetLogTypeStringBeforeLabel(std::string_view sLogType, std::string_view sBLabel);
+        LOGCRAFT_API void SetLogTypeStringBeforeTime(std::string_view sLogType, std::string_view sBTime);
+        LOGCRAFT_API void SetLogTypeStringBeforeDate(std::string_view sLogType, std::string_view sBDate);
+        LOGCRAFT_API void SetLogTypeStringBeforeFunction(std::string_view sLogType, std::string_view sBFunction);
+        LOGCRAFT_API void SetLogTypeStringBeforeLine(std::string_view sLogType, std::string_view sBLine);
+        LOGCRAFT_API void SetLogTypeStringBeforeMessage(std::string_view sLogType, std::string_view sBMessage);
+
+        LOGCRAFT_API void SetLogTypeStringAfterLevel(std::string_view sLogType, std::string_view sALevel);
+        LOGCRAFT_API void SetLogTypeStringAfterLabel(std::string_view sLogType, std::string_view sALabel);
+        LOGCRAFT_API void SetLogTypeStringAfterTime(std::string_view sLogType, std::string_view sATime);
+        LOGCRAFT_API void SetLogTypeStringAfterDate(std::string_view sLogType, std::string_view sADate);
+        LOGCRAFT_API void SetLogTypeStringAfterFunction(std::string_view sLogType, std::string_view sAFunction);
+        LOGCRAFT_API void SetLogTypeStringAfterLine(std::string_view sLogType, std::string_view sALine);
+        LOGCRAFT_API void SetLogTypeStringAfterMessage(std::string_view sLogType, std::string_view sAMessage);
+
+        LOGCRAFT_API void SetLogTypeStringBeforeLevelToAll(std::string_view sBLevel);
+        LOGCRAFT_API void SetLogTypeStringBeforeLabelToAll(std::string_view sBLabel);
+        LOGCRAFT_API void SetLogTypeStringBeforeTimeToAll(std::string_view sBTime);
+        LOGCRAFT_API void SetLogTypeStringBeforeDateToAll(std::string_view sBDate);
+        LOGCRAFT_API void SetLogTypeStringBeforeFunctionToAll(std::string_view sBFunction);
+        LOGCRAFT_API void SetLogTypeStringBeforeLineToAll(std::string_view sBLine);
+        LOGCRAFT_API void SetLogTypeStringBeforeMessageToAll(std::string_view sBMessage);
+
+        LOGCRAFT_API void SetLogTypeStringAfterLevelToAll(std::string_view sALevel);
+        LOGCRAFT_API void SetLogTypeStringAfterLabelToAll(std::string_view sALabel);
+        LOGCRAFT_API void SetLogTypeStringAfterTimeToAll(std::string_view sATime);
+        LOGCRAFT_API void SetLogTypeStringAfterDateToAll(std::string_view sADate);
+        LOGCRAFT_API void SetLogTypeStringAfterFunctionToAll(std::string_view sAFunction);
+        LOGCRAFT_API void SetLogTypeStringAfterLineToAll(std::string_view sALine);
+        LOGCRAFT_API void SetLogTypeStringAfterMessageToAll(std::string_view sAMessage);
     }
 
     //TODO: rename function
@@ -161,36 +197,9 @@ namespace lc
     LOGCRAFT_API void SetLogTypeOrderToAll(std::vector<LogOrder> logOrder);
     LOGCRAFT_API void SetLogTypeOrderToAll(std::initializer_list<LogOrder> logOrder);
 
-    LOGCRAFT_API void SetLogTypeStringBeforeLevel(std::string_view sLogType, std::string_view sBLevel);
-    LOGCRAFT_API void SetLogTypeStringBeforeLabel(std::string_view sLogType, std::string_view sBLabel);
-    LOGCRAFT_API void SetLogTypeStringBeforeTime(std::string_view sLogType, std::string_view sBTime);
-    LOGCRAFT_API void SetLogTypeStringBeforeDate(std::string_view sLogType, std::string_view sBDate);
-    LOGCRAFT_API void SetLogTypeStringBeforeFunction(std::string_view sLogType, std::string_view sBFunction);
-    LOGCRAFT_API void SetLogTypeStringBeforeLine(std::string_view sLogType, std::string_view sBLine);
-    LOGCRAFT_API void SetLogTypeStringBeforeMessage(std::string_view sLogType, std::string_view sBMessage);
+    LOGCRAFT_API void SetFormatTrim(std::string_view sLogType, std::string_view sFormatTrim);
+    LOGCRAFT_API void SetFormatTrimToAll(std::string_view sFormatTrim);
 
-    LOGCRAFT_API void SetLogTypeStringAfterLevel(std::string_view sLogType, std::string_view sALevel);
-    LOGCRAFT_API void SetLogTypeStringAfterLabel(std::string_view sLogType, std::string_view sALabel);
-    LOGCRAFT_API void SetLogTypeStringAfterTime(std::string_view sLogType, std::string_view sATime);
-    LOGCRAFT_API void SetLogTypeStringAfterDate(std::string_view sLogType, std::string_view sADate);
-    LOGCRAFT_API void SetLogTypeStringAfterFunction(std::string_view sLogType, std::string_view sAFunction);
-    LOGCRAFT_API void SetLogTypeStringAfterLine(std::string_view sLogType, std::string_view sALine);
-    LOGCRAFT_API void SetLogTypeStringAfterMessage(std::string_view sLogType, std::string_view sAMessage);
-
-    LOGCRAFT_API void SetLogTypeStringBeforeLevelToAll(std::string_view sBLevel);
-    LOGCRAFT_API void SetLogTypeStringBeforeLabelToAll(std::string_view sBLabel);
-    LOGCRAFT_API void SetLogTypeStringBeforeTimeToAll(std::string_view sBTime);
-    LOGCRAFT_API void SetLogTypeStringBeforeDateToAll(std::string_view sBDate);
-    LOGCRAFT_API void SetLogTypeStringBeforeFunctionToAll(std::string_view sBFunction);
-    LOGCRAFT_API void SetLogTypeStringBeforeLineToAll(std::string_view sBLine);
-    LOGCRAFT_API void SetLogTypeStringBeforeMessageToAll(std::string_view sBMessage);
-
-
-    LOGCRAFT_API void SetLogTypeStringAfterLevelToAll(std::string_view sALevel);
-    LOGCRAFT_API void SetLogTypeStringAfterLabelToAll(std::string_view sALabel);
-    LOGCRAFT_API void SetLogTypeStringAfterTimeToAll(std::string_view sATime);
-    LOGCRAFT_API void SetLogTypeStringAfterDateToAll(std::string_view sADate);
-    LOGCRAFT_API void SetLogTypeStringAfterFunctionToAll(std::string_view sAFunction);
-    LOGCRAFT_API void SetLogTypeStringAfterLineToAll(std::string_view sALine);
-    LOGCRAFT_API void SetLogTypeStringAfterMessageToAll(std::string_view sAMessage);
+    LOGCRAFT_API void SetFormat(std::string_view sLogType, std::string_view sFormat);
+    LOGCRAFT_API void SetFormatToAll(std::string_view sFormat);
 }
