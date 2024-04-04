@@ -10,12 +10,12 @@ namespace lc::internal
 
 #pragma region FillBuffer
 
-    void FillTimeToBuffer(std::stringbuf& buffer, const LogConfig& config)
+    void FillTimeToBuffer(std::stringbuf& buffer, const LogConfig& config, bool fileMode)
     {
         if(!config.m_bLogTime)
             return;
 
-        if(config.m_bColorTime)
+        if(config.m_bColorTime && !fileMode)
             buffer.sputn(config.m_sColorTime.data(), config.m_sColorTime.size());
 
         if(!config.m_sBTime.empty())
@@ -27,19 +27,19 @@ namespace lc::internal
         if(!config.m_sATime.empty())
             buffer.sputn(config.m_sATime.data(), config.m_sATime.size());
 
-        if(config.m_bColorTime)
+        if(config.m_bColorTime && !fileMode)
         {
             auto color = internal::GetResetColor();
             buffer.sputn(color.data(), color.size());
         }
     }
 
-    void FillDateToBuffer(std::stringbuf& buffer, const LogConfig& config)
+    void FillDateToBuffer(std::stringbuf& buffer, const LogConfig& config, bool fileMode)
     {
         if(!config.m_bLogDate)
             return;
 
-        if(config.m_bColorDate)
+        if(config.m_bColorDate && !fileMode)
             buffer.sputn(config.m_sColorDate.data(), config.m_sColorDate.size());
 
         if(!config.m_sBDate.empty())
@@ -51,19 +51,19 @@ namespace lc::internal
         if(!config.m_sADate.empty())
             buffer.sputn(config.m_sADate.data(), config.m_sADate.size());
 
-        if(config.m_bColorDate)
+        if(config.m_bColorDate && !fileMode)
         {
             auto color = internal::GetResetColor();
             buffer.sputn(color.data(), color.size());
         }
     }
 
-    void FillFunctionToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sFunction)
+    void FillFunctionToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sFunction, bool fileMode)
     {
         if(!config.m_bLogFunction)
             return;
 
-        if(config.m_bColorFunction)
+        if(config.m_bColorFunction && !fileMode)
             buffer.sputn(config.m_sColorFunction.data(), config.m_sColorFunction.size());
 
         if(!config.m_sBFunction.empty())
@@ -74,19 +74,19 @@ namespace lc::internal
         if(!config.m_sAFunction.empty())
             buffer.sputn(config.m_sAFunction.data(), config.m_sAFunction.size());
 
-        if(config.m_bColorFunction)
+        if(config.m_bColorFunction && !fileMode)
         {
             auto color = internal::GetResetColor();
             buffer.sputn(color.data(), color.size());
         }
     }
 
-    void FillLineToBuffer(std::stringbuf& buffer, const LogConfig& config, int nLine)
+    void FillLineToBuffer(std::stringbuf& buffer, const LogConfig& config, int nLine, bool fileMode)
     {
         if(!config.m_bLogLine)
             return;
 
-        if(config.m_bColorLine)
+        if(config.m_bColorLine && !fileMode)
             buffer.sputn(config.m_sColorLine.data(), config.m_sColorLine.size());
 
         if(!config.m_sBLine.empty())
@@ -97,19 +97,19 @@ namespace lc::internal
         if(!config.m_sALine.empty())
             buffer.sputn(config.m_sALine.data(), config.m_sALine.size());
 
-        if(config.m_bColorLine)
+        if(config.m_bColorLine && !fileMode)
         {
             auto color = internal::GetResetColor();
             buffer.sputn(color.data(), color.size());
         }
     }
 
-    void FillLevelToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sLevel)
+    void FillLevelToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sLevel, bool fileMode)
     {
         if(!config.m_bLogLevel)
             return;
 
-        if(config.m_bColorLevel)
+        if(config.m_bColorLevel && !fileMode)
             buffer.sputn(config.m_sColorLevel.data(), config.m_sColorLevel.size());
 
         if(!config.m_sBLevel.empty())
@@ -130,19 +130,19 @@ namespace lc::internal
             buffer.sputn(std::string(nDiff, ' ').data(), nDiff);
         }
         
-        if(config.m_bColorLevel)
+        if(config.m_bColorLevel && !fileMode)
         {
             auto color = internal::GetResetColor();
             buffer.sputn(color.data(), color.size());
         }
     }
 
-    void FillLabelToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sLabel)
+    void FillLabelToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sLabel, bool fileMode)
     {
         if(sLabel == "")
             return;
 
-        if(config.m_bColorLabel)
+        if(config.m_bColorLabel && !fileMode)
             buffer.sputn(config.m_sColorLabel.data(), config.m_sColorLabel.size());
 
         if(!config.m_sBLabel.empty())
@@ -153,19 +153,19 @@ namespace lc::internal
         if(!config.m_sALabel.empty())
             buffer.sputn(config.m_sALabel.data(), config.m_sALabel.size());
 
-        if(config.m_bColorLabel)
+        if(config.m_bColorLabel && !fileMode)
         {
             auto color = internal::GetResetColor();
             buffer.sputn(color.data(), color.size());
         }
     }
 
-    void FillMessageToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sMessage)
+    void FillMessageToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sMessage, bool fileMode)
     {
         if(!config.m_bLogMessage)
             return;
 
-        if(config.m_bColorMessage)
+        if(config.m_bColorMessage && !fileMode)
             buffer.sputn(config.m_sColorMessage.data(), config.m_sColorMessage.size());
 
         if(!config.m_sBMessage.empty())
@@ -176,14 +176,14 @@ namespace lc::internal
         if(!config.m_sAMessage.empty())
             buffer.sputn(config.m_sAMessage.data(), config.m_sAMessage.size());
 
-        if(config.m_bColorMessage)
+        if(config.m_bColorMessage && !fileMode)
         {
             auto color = internal::GetResetColor();
             buffer.sputn(color.data(), color.size());
         }
     }
 
-    void FillBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine)
+    void FillBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine, bool fileMode)
     {
         auto& oder = config.m_logOrder;
 
@@ -192,25 +192,25 @@ namespace lc::internal
             switch(order)
             {
                 case LogOrder::Time:
-                    FillTimeToBuffer(buffer, config);
+                    FillTimeToBuffer(buffer, config, fileMode);
                     break;
                 case LogOrder::Date:
-                    FillDateToBuffer(buffer, config);
+                    FillDateToBuffer(buffer, config, fileMode);
                     break;
                 case LogOrder::Function:
-                    FillFunctionToBuffer(buffer, config, sFunction);
+                    FillFunctionToBuffer(buffer, config, sFunction, fileMode);
                     break;
                 case LogOrder::Line:
-                    FillLineToBuffer(buffer, config, nLine);
+                    FillLineToBuffer(buffer, config, nLine, fileMode);
                     break;
                 case LogOrder::Level:
-                    FillLevelToBuffer(buffer, config, sLevel);
+                    FillLevelToBuffer(buffer, config, sLevel, fileMode);
                     break;
                 case LogOrder::Label:
-                    FillLabelToBuffer(buffer, config, sLabel);
+                    FillLabelToBuffer(buffer, config, sLabel, fileMode);
                     break;
                 case LogOrder::Message:
-                    FillMessageToBuffer(buffer, config, sMessage);
+                    FillMessageToBuffer(buffer, config, sMessage, fileMode);
                     break;
                 default:
                     break;
@@ -220,7 +220,7 @@ namespace lc::internal
 
 #pragma endregion FillBuffer
 
-    LOGCRAFT_API std::string BuildMessage(std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine)
+    LOGCRAFT_API std::string BuildMessage(std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine, bool fileMode)
     {
         auto configOpt = internal::GetLogConfig(sLevel);
         if(!configOpt.has_value())
@@ -230,7 +230,7 @@ namespace lc::internal
         auto& oder = config.m_logOrder;
 
         std::stringbuf buffer;
-        FillBuffer(buffer, config, sLevel, sLabel, sMessage, sFunction, sFile, nLine);
+        FillBuffer(buffer, config, sLevel, sLabel, sMessage, sFunction, sFile, nLine, fileMode);
 
         return buffer.str();
     }
@@ -240,8 +240,8 @@ namespace lc::internal
         std::printf("%s\n", sMessage.data());
     }
 
-    LOGCRAFT_API void WriteToFile(std::string_view sFileName, std::string_view sMessage)
+    LOGCRAFT_API void WriteToFile(std::string_view sMessage)
     {
-
+        std::fprintf(nullptr, "%s\n", sMessage.data());
     }
 }
