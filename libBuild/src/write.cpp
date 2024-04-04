@@ -18,8 +18,14 @@ namespace lc::internal
         if(config.m_bColorTime)
             buffer.sputn(config.m_sColorTime.data(), config.m_sColorTime.size());
 
+        if(!config.m_sBTime.empty())
+            buffer.sputn(config.m_sBTime.data(), config.m_sBTime.size());
+
         auto time = eutil::getCurrentTime(config.m_sLogTimeFormat);
         buffer.sputn(time.data(), time.size());
+
+        if(!config.m_sATime.empty())
+            buffer.sputn(config.m_sATime.data(), config.m_sATime.size());
 
         if(config.m_bColorTime)
         {
@@ -36,8 +42,14 @@ namespace lc::internal
         if(config.m_bColorDate)
             buffer.sputn(config.m_sColorDate.data(), config.m_sColorDate.size());
 
+        if(!config.m_sBDate.empty())
+            buffer.sputn(config.m_sBDate.data(), config.m_sBDate.size());
+
         auto date = eutil::getCurrentTime(config.m_sLogDateFormat);
         buffer.sputn(date.data(), date.size());
+
+        if(!config.m_sADate.empty())
+            buffer.sputn(config.m_sADate.data(), config.m_sADate.size());
 
         if(config.m_bColorDate)
         {
@@ -54,7 +66,13 @@ namespace lc::internal
         if(config.m_bColorFunction)
             buffer.sputn(config.m_sColorFunction.data(), config.m_sColorFunction.size());
 
+        if(!config.m_sBFunction.empty())
+            buffer.sputn(config.m_sBFunction.data(), config.m_sBFunction.size());
+
         buffer.sputn(sFunction.data(), sFunction.size());
+
+        if(!config.m_sAFunction.empty())
+            buffer.sputn(config.m_sAFunction.data(), config.m_sAFunction.size());
 
         if(config.m_bColorFunction)
         {
@@ -71,7 +89,13 @@ namespace lc::internal
         if(config.m_bColorLine)
             buffer.sputn(config.m_sColorLine.data(), config.m_sColorLine.size());
 
+        if(!config.m_sBLine.empty())
+            buffer.sputn(config.m_sBLine.data(), config.m_sBLine.size());
+
         buffer.sputn(std::to_string(nLine).data(), std::to_string(nLine).size());
+
+        if(!config.m_sALine.empty())
+            buffer.sputn(config.m_sALine.data(), config.m_sALine.size());
 
         if(config.m_bColorLine)
         {
@@ -88,7 +112,13 @@ namespace lc::internal
         if(config.m_bColorLevel)
             buffer.sputn(config.m_sColorLevel.data(), config.m_sColorLevel.size());
 
+        if(!config.m_sBLevel.empty())
+            buffer.sputn(config.m_sBLevel.data(), config.m_sBLevel.size());
+
         buffer.sputn(sLevel.data(), sLevel.size());
+
+        if(!config.m_sALevel.empty())
+            buffer.sputn(config.m_sALevel.data(), config.m_sALevel.size());
 
         auto& lcConfig = internal::GetLogCraftConfig();
         if(lcConfig.m_bAllignLeft)
@@ -115,7 +145,13 @@ namespace lc::internal
         if(config.m_bColorLabel)
             buffer.sputn(config.m_sColorLabel.data(), config.m_sColorLabel.size());
 
+        if(!config.m_sBLabel.empty())
+            buffer.sputn(config.m_sBLabel.data(), config.m_sBLabel.size());
+
         buffer.sputn(sLabel.data(), sLabel.size());
+
+        if(!config.m_sALabel.empty())
+            buffer.sputn(config.m_sALabel.data(), config.m_sALabel.size());
 
         if(config.m_bColorLabel)
         {
@@ -132,7 +168,13 @@ namespace lc::internal
         if(config.m_bColorMessage)
             buffer.sputn(config.m_sColorMessage.data(), config.m_sColorMessage.size());
 
+        if(!config.m_sBMessage.empty())
+            buffer.sputn(config.m_sBMessage.data(), config.m_sBMessage.size());
+
         buffer.sputn(sMessage.data(), sMessage.size());
+
+        if(!config.m_sAMessage.empty())
+            buffer.sputn(config.m_sAMessage.data(), config.m_sAMessage.size());
 
         if(config.m_bColorMessage)
         {

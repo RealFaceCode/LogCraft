@@ -31,5 +31,18 @@ namespace lc
         SetLogTypeColorLevel("WARNING", LogColor::Yellow);
         SetLogTypeColorLevel("ERROR", LogColor::Red);
         SetLogTypeColorLevel("CRITICAL", LogColor::LightMagenta, {LogEffect::Blink});
+
+        SetLogTypeStringBeforeLevelToAll("[");
+        SetLogTypeStringAfterLevelToAll("]");
+        SetLogTypeStringBeforeMessageToAll(" ");
+
+        SetLogTypeStringBeforeLabelToAll("[Label:");
+        SetLogTypeStringAfterLabelToAll("] ");
+        SetLogTypeStringAfterTimeToAll(" ");
+        SetLogTypeStringAfterDateToAll(" ");
+        SetLogTypeStringBeforeFunctionToAll(" ");
+        SetLogTypeStringAfterFunctionToAll(" ");
+        SetLogTypeStringBeforeLineToAll("Line:");
+        SetLogTypeStringAfterLineToAll(" ");
     }
 }

@@ -478,4 +478,186 @@ namespace lc
             value.m_logOrder.insert(value.m_logOrder.end(), logOrder.begin(), logOrder.end());
         }
     }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeLevel(std::string_view sLogType, std::string_view sBLevel)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sBLevel = sBLevel;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeLabel(std::string_view sLogType, std::string_view sBLabel)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sBLabel = sBLabel;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeTime(std::string_view sLogType, std::string_view sBTime)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sBTime = sBTime;
+    }   
+
+    LOGCRAFT_API void SetLogTypeStringBeforeDate(std::string_view sLogType, std::string_view sBDate)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sBDate = sBDate;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeFunction(std::string_view sLogType, std::string_view sBFunction)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sBFunction = sBFunction;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeLine(std::string_view sLogType, std::string_view sBLine)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sBLine = sBLine;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeMessage(std::string_view sLogType, std::string_view sBMessage)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sBMessage = sBMessage;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterLevel(std::string_view sLogType, std::string_view sALevel)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sALevel = sALevel;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterLabel(std::string_view sLogType, std::string_view sALabel)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sALabel = sALabel;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterTime(std::string_view sLogType, std::string_view sATime)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sATime = sATime;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterDate(std::string_view sLogType, std::string_view sADate)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sADate = sADate;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterFunction(std::string_view sLogType, std::string_view sAFunction)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sAFunction = sAFunction;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterLine(std::string_view sLogType, std::string_view sALine)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sALine = sALine;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterMessage(std::string_view sLogType, std::string_view sAMessage)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sAMessage = sAMessage;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeLevelToAll(std::string_view sBLevel)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sBLevel = sBLevel;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeLabelToAll(std::string_view sBLabel)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sBLabel = sBLabel;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeTimeToAll(std::string_view sBTime)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sBTime = sBTime;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeDateToAll(std::string_view sBDate)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sBDate = sBDate;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeFunctionToAll(std::string_view sBFunction)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sBFunction = sBFunction;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeLineToAll(std::string_view sBLine)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sBLine = sBLine;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringBeforeMessageToAll(std::string_view sBMessage)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sBMessage = sBMessage;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterLevelToAll(std::string_view sALevel)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sALevel = sALevel;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterLabelToAll(std::string_view sALabel)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sALabel = sALabel;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterTimeToAll(std::string_view sATime)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sATime = sATime;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterDateToAll(std::string_view sADate)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sADate = sADate;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterFunctionToAll(std::string_view sAFunction)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sAFunction = sAFunction;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterLineToAll(std::string_view sALine)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sALine =sALine;
+    }
+
+    LOGCRAFT_API void SetLogTypeStringAfterMessageToAll(std::string_view sAMessage)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_sAMessage = sAMessage;
+    }
 }
