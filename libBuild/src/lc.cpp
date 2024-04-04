@@ -2,6 +2,7 @@
 #include "logConfig.hpp"
 #include "logcraftConfig.hpp"
 #include "logColor.hpp"
+#include "msgServer.hpp"
 
 namespace lc
 {
@@ -24,5 +25,7 @@ namespace lc
         SetLogColorLevel("WARNING", LogColor::Yellow);
         SetLogColorLevel("ERROR", LogColor::Red);
         SetLogColorLevel("CRITICAL", LogColor::LightMagenta, {LogEffect::Blink});
+
+        internal::SartMsgServer();
     }
 }
