@@ -19,10 +19,10 @@ namespace lc
         SetFormatTrimToAll("] }");
         SetFormatToAll("[{LEVEL}] [LABEL:{LABEL}] [{TIME} {DATE}] [{FUNC}] [LINE:{LINE}] {MSG}");
 
-        SetLogTypeColorLevel("INFO", LogColor::White);
-        SetLogTypeColorLevel("DEBUG", LogColor::Green);
-        SetLogTypeColorLevel("WARNING", LogColor::Yellow);
-        SetLogTypeColorLevel("ERROR", LogColor::Red);
-        SetLogTypeColorLevel("CRITICAL", LogColor::LightMagenta, {LogEffect::Blink});
+        SetLogColorLevel("INFO", LogColor::White);
+        SetLogColorLevel("DEBUG", LogColor::Green);
+        SetLogColorLevel("WARNING", LogColor::Yellow);
+        SetLogColorLevel("ERROR", LogColor::Red);
+        SetLogColorLevel("CRITICAL", LogColor::LightMagenta, {LogEffect::Blink});
     }
 }
