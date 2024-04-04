@@ -9,7 +9,7 @@ namespace lc::internal
     template<size_t N>
     struct LOGCRAFT_API StringLiteral
     {
-        constexpr LOGCRAFT_API StringLiteral(const char (&str)[N])
+        constexpr StringLiteral(const char (&str)[N])
         {
             std::copy_n(str, N, value);
         }
