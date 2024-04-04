@@ -2,6 +2,8 @@
 
 #include <memory>
 
+#include "write.hpp"
+
 namespace lc
 {
     namespace internal
@@ -13,6 +15,9 @@ namespace lc
         {
             g_threadPool.setTaskFunc([](const LogMsg& msg) -> std::optional<int>
             {
+                auto cMsg = CombineArguments(msg.m_strMsg, msg.m_args);
+                auto LogMsg = BuildMessage(msg.m_sLevel, msg.m_sLabel, cMsg, msg.m_sourceLocation.function_name(), msg.m_sourceLocation.file_name(), msg.m_sourceLocation.line());
+                WriteToConsole(LogMsg);
                 return std::nullopt;
             });
 

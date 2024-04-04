@@ -12,7 +12,7 @@ namespace lc
     {
         struct LOGCRAFT_API MsgServerConfig
         {
-            std::size_t m_nMaxThreads = 0;
+            std::size_t m_nMaxThreads = 2;
         };
 
         LOGCRAFT_API void SartMsgServer();
