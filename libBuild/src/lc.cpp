@@ -28,4 +28,9 @@ namespace lc
 
         internal::SartMsgServer();
     }
+
+    LC_API void DeInit()
+    {
+        internal::StopMsgServer();
+    }
 }
