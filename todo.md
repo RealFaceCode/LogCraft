@@ -10,3 +10,8 @@
 - [ ] Add colorization for user-defined areas in message section
 
 - [ ] Add testing
+
+- [ ] Adding a callstack
+  - [ ] Saving callstack for user defined log types
+  - [ ] write callstack tree to console/file
+  - [ ] Adding numbers from witch line the child func was called
