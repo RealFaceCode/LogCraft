@@ -9,12 +9,21 @@
 namespace lc
 {
 
-    template<internal::StringLiteral Label,typename... Args>
+    template<internal::StringLiteral Label, typename... Args>
     void Log(std::string_view sLevel, internal::MsgLiteral msg, const Args&... args)
     {
         auto& tp = internal::GetThreadPool();
 
         auto logMsg = internal::CreateLogMsg(msg.m_strMsg, sLevel, Label.value, msg.m_sourceLocation, args...);
+        tp.push(logMsg);
+    }
+
+    template<typename... Args>
+    void Log(std::string_view sLevel, internal::MsgLiteral msg, const Args&... args)
+    {
+        auto& tp = internal::GetThreadPool();
+
+        auto logMsg = internal::CreateLogMsg(msg.m_strMsg, sLevel, "", msg.m_sourceLocation, args...);
         tp.push(logMsg);
     }
 }
