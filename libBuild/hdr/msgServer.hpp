@@ -10,16 +10,16 @@ namespace lc
 {
     namespace internal
     {
-        struct LOGCRAFT_API MsgServerConfig
+        struct LC_API MsgServerConfig
         {
             std::size_t m_nMaxThreads = 2;
         };
 
-        LOGCRAFT_API void SartMsgServer();
-        LOGCRAFT_API void StopMsgServer();
+        LC_API void SartMsgServer();
+        LC_API void StopMsgServer();
 
-        LOGCRAFT_API eutil::ThreadPool<LogMsg>& GetThreadPool();
+        LC_API eutil::ThreadPool<LogMsg>& GetThreadPool();
     }
 
-    LOGCRAFT_API void SetMaxThreads(std::size_t nThreads);
+    LC_API void SetMaxThreads(std::size_t nThreads);
 }

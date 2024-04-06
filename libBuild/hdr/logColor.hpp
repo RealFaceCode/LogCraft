@@ -42,9 +42,9 @@ namespace lc
 
     namespace internal
     {
-        LOGCRAFT_API std::string CreateAsciiEscapeSequence(LogColor color, const std::vector<LogEffect> &effect);
-        LOGCRAFT_API std::string GetColor(LogColor color);
-        LOGCRAFT_API std::string GetEffects(const std::vector<LogEffect> &effect);
-        LOGCRAFT_API std::string GetResetColor();
+        LC_API std::string CreateAsciiEscapeSequence(LogColor color, const std::vector<LogEffect> &effect);
+        LC_API std::string GetColor(LogColor color);
+        LC_API std::string GetEffects(const std::vector<LogEffect> &effect);
+        LC_API std::string GetResetColor();
     }
 }

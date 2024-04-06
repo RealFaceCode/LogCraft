@@ -38,7 +38,7 @@ namespace lc
 
     namespace internal
     {
-        LOGCRAFT_API std::string CreateAsciiEscapeSequence(LogColor color, const std::vector<LogEffect> &effect)
+        LC_API std::string CreateAsciiEscapeSequence(LogColor color, const std::vector<LogEffect> &effect)
         {
             std::stringbuf buffer;
             auto& colorStr = g_mapColor[color];
@@ -54,12 +54,12 @@ namespace lc
             return buffer.str();
         }
 
-        LOGCRAFT_API std::string GetColor(LogColor color)
+        LC_API std::string GetColor(LogColor color)
         {
             return g_mapColor[color];
         }
 
-        LOGCRAFT_API std::string GetEffects(const std::vector<LogEffect> &effect)
+        LC_API std::string GetEffects(const std::vector<LogEffect> &effect)
         {
             std::stringbuf buffer;
 
@@ -72,7 +72,7 @@ namespace lc
             return buffer.str();
         }
 
-        LOGCRAFT_API std::string GetResetColor()
+        LC_API std::string GetResetColor()
         {
             return g_mapColor[LogColor::Reset];
         }

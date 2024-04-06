@@ -220,7 +220,7 @@ namespace lc::internal
 
 #pragma endregion FillBuffer
 
-    LOGCRAFT_API std::string BuildMessage(std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine, bool fileMode)
+    LC_API std::string BuildMessage(std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine, bool fileMode)
     {
         auto configOpt = internal::GetLogConfig(sLevel);
         if(!configOpt.has_value())
@@ -235,12 +235,12 @@ namespace lc::internal
         return buffer.str();
     }
 
-    LOGCRAFT_API void WriteToConsole(std::string_view sMessage)
+    LC_API void WriteToConsole(std::string_view sMessage)
     {
         std::printf("%s\n", sMessage.data());
     }
 
-    LOGCRAFT_API void WriteToFile(std::string_view sMessage)
+    LC_API void WriteToFile(std::string_view sMessage)
     {
         std::fprintf(nullptr, "%s\n", sMessage.data());
     }

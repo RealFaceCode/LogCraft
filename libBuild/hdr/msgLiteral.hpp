@@ -7,7 +7,7 @@
 
 namespace lc::internal
 {
-    struct LOGCRAFT_API MsgLiteral
+    struct LC_API MsgLiteral
     {
     public:
         MsgLiteral () = default;

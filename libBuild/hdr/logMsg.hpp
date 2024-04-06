@@ -9,7 +9,7 @@
 
 namespace lc
 {
-    struct LOGCRAFT_API LogMsg
+    struct LC_API LogMsg
     {
         std::string m_strMsg                    = "";
         std::string m_sLevel                    = "";

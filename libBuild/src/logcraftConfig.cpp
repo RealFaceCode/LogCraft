@@ -6,18 +6,18 @@ namespace lc
     {
         LogCraftConfig g_logCraftConfig;
 
-        LOGCRAFT_API LogCraftConfig& GetLogCraftConfig()
+        LC_API LogCraftConfig& GetLogCraftConfig()
         {
             return g_logCraftConfig;
         }
     }
 
-    LOGCRAFT_API void SetAllignLevel(bool bAllignLeft)
+    LC_API void SetAllignLevel(bool bAllignLeft)
     {
         internal::g_logCraftConfig.m_bAllignLeft = bAllignLeft;
     }
 
-    LOGCRAFT_API void SetMaxLevelWidth(std::size_t nWidth)
+    LC_API void SetMaxLevelWidth(std::size_t nWidth)
     {
         internal::g_logCraftConfig.m_nCurrentMaxLevelWidth = nWidth;
     }

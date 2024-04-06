@@ -13,7 +13,7 @@ namespace lc
         eutil::ThreadPool<LogMsg> g_threadPoolConsole;
         eutil::ThreadPool<LogMsg> g_threadPoolFile;
 
-        LOGCRAFT_API void SartMsgServer()
+        LC_API void SartMsgServer()
         {
             g_threadPoolConsole.setTaskFunc([](const LogMsg& msg) -> std::optional<int>
             {
@@ -46,19 +46,19 @@ namespace lc
             g_threadPoolFile.start();
         }
 
-        LOGCRAFT_API void StopMsgServer()
+        LC_API void StopMsgServer()
         {
             g_threadPoolConsole.stop();
             g_threadPoolFile.stop();
         }
 
-        LOGCRAFT_API eutil::ThreadPool<LogMsg>& GetThreadPool()
+        LC_API eutil::ThreadPool<LogMsg>& GetThreadPool()
         {
             return g_threadPoolConsole;;
         }
     }
 
-    LOGCRAFT_API void SetMaxThreads(std::size_t nThreads)
+    LC_API void SetMaxThreads(std::size_t nThreads)
     {
         internal::g_msgServerConfig.m_nMaxThreads = nThreads;
     }

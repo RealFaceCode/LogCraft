@@ -7,7 +7,7 @@
 namespace lc::internal
 {
     template<size_t N>
-    struct LOGCRAFT_API StringLiteral
+    struct LC_API StringLiteral
     {
         constexpr StringLiteral(const char (&str)[N])
         {

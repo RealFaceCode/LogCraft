@@ -13,7 +13,7 @@
 #endif
 
 #ifdef LOGCRAFT_EXPORTS
-    #define LOGCRAFT_API DLL_EXPORT
+    #define LC_API DLL_EXPORT
 #else
-    #define LOGCRAFT_API DLL_IMPORT
+    #define LC_API DLL_IMPORT
 #endif
