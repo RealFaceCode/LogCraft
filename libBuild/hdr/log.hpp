@@ -8,7 +8,6 @@
 
 namespace lc
 {
-
     template<internal::StringLiteral Label, typename... Args>
     void Log(std::string_view sLevel, internal::MsgLiteral msg, const Args&... args)
     {
