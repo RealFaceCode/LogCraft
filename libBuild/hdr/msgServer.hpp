@@ -18,7 +18,7 @@ namespace lc
         LOGCRAFT_API void SartMsgServer();
         LOGCRAFT_API void StopMsgServer();
 
-        //LOGCRAFT_API eutil::ThreadPool<LogMsg>& GetThreadPool();
+        LOGCRAFT_API eutil::ThreadPool<LogMsg>& GetThreadPool();
     }
 
     LOGCRAFT_API void SetMaxThreads(std::size_t nThreads);
