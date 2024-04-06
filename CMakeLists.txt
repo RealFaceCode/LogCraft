@@ -27,10 +27,10 @@ add_subdirectory(thirdparty/eutil)
 
 if(NOT TARGET ${PROJECT_NAME})
     add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
+    target_link_libraries(${PROJECT_NAME} PRIVATE eUtil)
     target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23)
     target_include_directories(${PROJECT_NAME} PUBLIC libBuild/hdr)
     target_include_directories(${PROJECT_NAME} PUBLIC thirdparty/eutil/libBuild/hdr)
-    target_link_libraries(${PROJECT_NAME} PRIVATE eUtil)
     target_compile_definitions(${PROJECT_NAME} PRIVATE LOGCRAFT_EXPORTS)
 endif()
 
