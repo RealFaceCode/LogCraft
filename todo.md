@@ -1,13 +1,14 @@
-# Current TODO´s
+# TODO´s
 
-## LogCraft
+- [ ] Add testing
+
+## LogCraft v0.2.0
 
 - [ ] Implement file I/O functionality
   - [ ] Write to file
   - [ ] Track file size for logging
   - [ ] Create timestamped log files
   - [ ] Create new log files when maximum line count or file size is reached
-
 - [ ] Adding a callstack
   - [ ] Saving callstack for user defined log types
   - [ ] write callstack tree to console/file
@@ -15,8 +16,15 @@
     - [ ] File
   - [ ] Add numbers from witch line the child func was called
   - [ ] Add user defined format for callstack output
-
 - [ ] Add DeInit() function
 - [ ] Add lc::Log() func without StringLiteral for label
 - [ ] Add colorization for user-defined areas in message section
-- [ ] Add testing
+
+## LogCtaft v0.3.0
+
+- [ ] Add thread information to log msg´s
+- [ ] Add Logging buffers for storing log msg´s
+  - [ ] Filter options for log levels
+  - [ ] Add max num off stored logs
+- [ ] Add max num of log files
+  - [ ] Del old log files
