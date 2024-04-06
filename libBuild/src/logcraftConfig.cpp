@@ -21,4 +21,9 @@ namespace lc
     {
         internal::g_logCraftConfig.m_nCurrentMaxLevelWidth = nWidth;
     }
+
+    LC_API void SetLogRootPath(const std::filesystem::path& path)
+    {
+        internal::g_logCraftConfig.m_LogRootPath = path;
+    }
 }

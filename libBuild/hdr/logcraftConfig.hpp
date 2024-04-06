@@ -1,6 +1,7 @@
 #pragma once
 
 #include <memory>
+#include <filesystem>
 
 #include "defines.hpp"
 
@@ -12,6 +13,7 @@ namespace lc
         {
             std::size_t m_nCurrentMaxLevelWidth = 0;
             bool m_bAllignLeft = true;
+            std::filesystem::path m_LogRootPath = "logs";
         };
 
         LC_API LogCraftConfig& GetLogCraftConfig();
@@ -19,4 +21,5 @@ namespace lc
 
     LC_API void SetAllignLevel(bool bAllignLeft);
     LC_API void SetMaxLevelWidth(std::size_t nWidth);
+    LC_API void SetLogRootPath(const std::filesystem::path& path);
 }

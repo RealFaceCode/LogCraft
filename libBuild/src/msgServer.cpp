@@ -4,6 +4,8 @@
 
 #include "write.hpp"
 #include "logConfig.hpp"
+#include "file.hpp"
+#include "logcraftConfig.hpp"
 
 namespace lc
 {
@@ -12,6 +14,8 @@ namespace lc
         MsgServerConfig g_msgServerConfig;
         eutil::ThreadPool<LogMsg> g_threadPoolConsole;
         eutil::ThreadPool<LogMsg> g_threadPoolFile;
+        eutil::File g_ConfigFile;
+        eutil::File g_LogFile;
 
         LC_API void SartMsgServer()
         {
@@ -42,6 +46,14 @@ namespace lc
                 return std::nullopt;
             });
 
+            auto& logCraftConfig = GetLogCraftConfig();
+
+            eutil::CreateDirectory(logCraftConfig.m_LogRootPath);
+
+            std::filesystem::path configPath = logCraftConfig.m_LogRootPath;
+            configPath /= "config.log";
+            g_ConfigFile.open();
+
             g_threadPoolFile.setThreadCount(g_msgServerConfig.m_nMaxThreads);
             g_threadPoolFile.start();
         }
@@ -54,7 +66,7 @@ namespace lc
 
         LC_API eutil::ThreadPool<LogMsg>& GetThreadPool()
         {
-            return g_threadPoolConsole;;
+            return g_threadPoolConsole;
         }
     }
 
