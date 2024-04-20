@@ -15,7 +15,7 @@
     - [x] Console
     - [ ] File
   - [x] Add numbers from witch line the child func was called
-  - [ ] Add user defined format for callstack output
+  - [x] Add user defined format for callstack output
 - [x] Add DeInit() function
 - [x] Add lc::Log() func without StringLiteral for label
 - [ ] Add colorization for user-defined areas in message section
