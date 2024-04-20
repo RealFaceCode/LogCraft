@@ -4,7 +4,8 @@
 #include <util.hpp>
 #include <print>
 #include "logConfig.hpp"
-#include "logCraftConfig.hpp"
+#include "logcraftConfig.hpp"
+#include "backtrace.hpp"
 
 namespace lc::internal
 {
@@ -184,7 +185,65 @@ namespace lc::internal
         }
     }
 
-    void FillBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine, bool fileMode)
+    void FillFileToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sFile, bool fileMode)
+    {
+        if(!config.m_bLogFile)
+            return;
+
+        if(config.m_bColorFile && !fileMode)
+            buffer.sputn(config.m_sColorFile.data(), config.m_sColorFile.size());
+
+        if(!config.m_sBFile.empty())
+            buffer.sputn(config.m_sBFile.data(), config.m_sBFile.size());
+
+        buffer.sputn(sFile.data(), sFile.size());
+
+        if(!config.m_sAFile.empty())
+            buffer.sputn(config.m_sAFile.data(), config.m_sAFile.size());
+
+        if(config.m_bColorFile && !fileMode)
+        {
+            auto color = internal::GetResetColor();
+            buffer.sputn(color.data(), color.size());
+        }
+    }
+
+    void FillTraceToBuffer(std::stringbuf& buffer, const LogConfig& config, Backtrace bt, bool fileMode)
+    {
+        if(!config.m_bLogTrace)
+            return;
+
+        if(config.m_bColorTrace && !fileMode)
+            buffer.sputn(config.m_sColorTrace.data(), config.m_sColorTrace.size());
+
+        if(!config.m_sBTrace.empty())
+            buffer.sputn(config.m_sBTrace.data(), config.m_sBTrace.size());
+
+
+        for(auto i = 0; i < bt.m_nLineNumbers.size(); i++) //TODO:
+        {
+            TrimFunctionName(bt);
+            TrimFile(bt);
+            DelAfterMain(bt);
+
+            buffer.sputn(bt.m_sFileNames[i].data(), bt.m_sFileNames[i].size());
+            buffer.sputn(":", 1);
+            buffer.sputn(std::to_string(bt.m_nLineNumbers[i]).data(), std::to_string(bt.m_nLineNumbers[i]).size());
+            buffer.sputn(" ", 1);
+            buffer.sputn(bt.m_sFunctionNames[i].data(), bt.m_sFunctionNames[i].size());
+        }
+
+        if(!config.m_sATrace.empty())
+            buffer.sputn(config.m_sATrace.data(), config.m_sATrace.size());
+
+        if(config.m_bColorTrace && !fileMode)
+        {
+            auto color = internal::GetResetColor();
+            buffer.sputn(color.data(), color.size());
+        }
+    }
+
+    void FillBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine, const Backtrace& bt, bool fileMode)
     {
         auto& oder = config.m_logOrder;
 
@@ -213,6 +272,12 @@ namespace lc::internal
                 case LogOrder::Message:
                     FillMessageToBuffer(buffer, config, sMessage, fileMode);
                     break;
+                case LogOrder::File:
+                    FillFileToBuffer(buffer, config, sFile, fileMode);
+                    break;
+                case LogOrder::Trace:
+                    FillTraceToBuffer(buffer, config, bt, fileMode);
+                    break;
                 default:
                     break;
             }
@@ -221,7 +286,7 @@ namespace lc::internal
 
 #pragma endregion FillBuffer
 
-    LC_API std::string BuildMessage(std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine, bool fileMode)
+    LC_API std::string BuildMessage(std::string_view sLevel, std::string_view sLabel, std::string_view sMessage, std::string_view sFunction, std::string_view sFile, int nLine, const Backtrace& bt, bool fileMode)
     {
         auto configOpt = internal::GetLogConfig(sLevel);
         if(!configOpt.has_value())
@@ -231,7 +296,7 @@ namespace lc::internal
         auto& oder = config.m_logOrder;
 
         std::stringbuf buffer;
-        FillBuffer(buffer, config, sLevel, sLabel, sMessage, sFunction, sFile, nLine, fileMode);
+        FillBuffer(buffer, config, sLevel, sLabel, sMessage, sFunction, sFile, nLine, bt, fileMode);
 
         return buffer.str();
     }

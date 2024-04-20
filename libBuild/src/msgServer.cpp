@@ -25,7 +25,7 @@ namespace lc
                 if(!lConfig.has_value() || !lConfig.value().get().m_bLogToConsole)
                     return std::nullopt;
 
-                auto LogMsg = BuildMessage(msg.m_sLevel, msg.m_sLabel, msg.m_strMsg, msg.m_sourceLocation.function_name(), msg.m_sourceLocation.file_name(), msg.m_sourceLocation.line());
+                auto LogMsg = BuildMessage(msg.m_sLevel, msg.m_sLabel, msg.m_strMsg, msg.m_sourceLocation.function_name(), msg.m_sourceLocation.file_name(), msg.m_sourceLocation.line(), msg.m_backtrace);
                 WriteToConsole(LogMsg);
 
                 return std::nullopt;
@@ -40,7 +40,7 @@ namespace lc
                 if(!lConfig.has_value() || !lConfig.value().get().m_bLogToFile)
                     return std::nullopt;
 
-                auto LogMsg = BuildMessage(msg.m_sLevel, msg.m_sLabel, msg.m_strMsg, msg.m_sourceLocation.function_name(), msg.m_sourceLocation.file_name(), msg.m_sourceLocation.line(), true);
+                auto LogMsg = BuildMessage(msg.m_sLevel, msg.m_sLabel, msg.m_strMsg, msg.m_sourceLocation.function_name(), msg.m_sourceLocation.file_name(), msg.m_sourceLocation.line(), msg.m_backtrace, true);
                 WriteToFile(LogMsg);
                 
                 return std::nullopt;

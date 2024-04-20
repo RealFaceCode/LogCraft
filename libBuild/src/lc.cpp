@@ -18,7 +18,7 @@ namespace lc
         orderSet = {"{LEVEL}", "{LABEL}", "{TIME}", "{DATE}", "{FUNC}", "{LINE}", "{MSG}", "{FILE}", "{TRACE}"};
 
         SetFormatTrimToAll("] }");
-        SetFormatToAll("[{LEVEL}] [LABEL:{LABEL}] [{TIME} {DATE}] [{FUNC}] [LINE:{LINE}] {MSG}");
+        SetFormatToAll("[{LEVEL}] [LABEL:{LABEL}] [{TIME} {DATE}] [{FUNC}] [LINE:{LINE}] {MSG}\n");
 
         SetLogColorLevel("INFO", LogColor::White);
         SetLogColorLevel("DEBUG", LogColor::Green);

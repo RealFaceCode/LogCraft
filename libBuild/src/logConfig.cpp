@@ -4,7 +4,7 @@
 #include <ranges>
 #include <algorithm>
 
-#include "logCraftConfig.hpp"
+#include "logcraftConfig.hpp"
 namespace lc
 {
     std::unordered_map<std::string, internal::LogConfig> g_logConfigMap;
@@ -111,6 +111,20 @@ namespace lc
                 it->second.m_sBMessage = sBMessage;
         }
 
+        LC_API void SetLogStringBeforeFile(std::string_view sLogType, std::string_view sBFile)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sBFile = sBFile;
+        }
+
+        LC_API void SetLogStringBeforeTrace(std::string_view sLogType, std::string_view sBTrace)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sBTrace = sBTrace;
+        }
+
         LC_API void SetLogStringAfterLevel(std::string_view sLogType, std::string_view sALevel)
         {
             auto it = g_logConfigMap.find(std::string(sLogType));
@@ -160,6 +174,20 @@ namespace lc
                 it->second.m_sAMessage = sAMessage;
         }
 
+        LC_API void SetLogStringAfterFile(std::string_view sLogType, std::string_view sAFile)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sAFile = sAFile;
+        }
+
+        LC_API void SetLogStringAfterTrace(std::string_view sLogType, std::string_view sATrace)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sATrace = sATrace;
+        }
+
         LC_API void SetLogStringBeforeLevelToAll(std::string_view sBLevel)
         {
             for (auto& [key, value] : g_logConfigMap)
@@ -202,6 +230,18 @@ namespace lc
                 value.m_sBMessage = sBMessage;
         }
 
+        LC_API void SetLogStringBeforeFileToAll(std::string_view sBFile)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sBFile = sBFile;
+        }
+
+        LC_API void SetLogStringBeforeTraceToAll(std::string_view sBTrace)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sBTrace = sBTrace;
+        }
+
         LC_API void SetLogStringAfterLevelToAll(std::string_view sALevel)
         {
             for (auto& [key, value] : g_logConfigMap)
@@ -242,6 +282,18 @@ namespace lc
         {
             for (auto& [key, value] : g_logConfigMap)
                 value.m_sAMessage = sAMessage;
+        }
+
+        LC_API void SetLogStringAfterFileToAll(std::string_view sAFile)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sAFile = sAFile;
+        }
+
+        LC_API void SetLogStringAfterTraceToAll(std::string_view sATrace)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sATrace = sATrace;
         }
     }
 
@@ -366,6 +418,32 @@ namespace lc
             value.m_bLogMessage = bLogMessage;
     }
 
+    LC_API void SetLogFile(std::string_view sLogType, bool bLogFile)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_bLogFile = bLogFile;
+    }
+
+    LC_API void SetLogFileToAll(bool bLogFile)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_bLogFile = bLogFile;
+    }
+
+    LC_API void SetLogTrace(std::string_view sLogType, bool bLogTrace)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_bLogTrace = bLogTrace;
+    }
+
+    LC_API void SetLogTraceToAll(bool bLogTrace)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_bLogTrace = bLogTrace;
+    }
+
     LC_API void SetLogFilePath(std::string_view sLogType, std::string_view sLogFilePath)
     {
         auto it = g_logConfigMap.find(std::string(sLogType));
@@ -478,6 +556,32 @@ namespace lc
             value.m_bColorMessage = bColorMessage;
     }
 
+    LC_API void SetLogColorFile(std::string_view sLogType, bool bColorFile)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_bColorFile = bColorFile;
+    }
+
+    LC_API void SetLogColorFileToAll(bool bColorFile)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_bColorFile = bColorFile;
+    }
+
+    LC_API void SetLogColorTrace(std::string_view sLogType, bool bColorTrace)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_bColorTrace = bColorTrace;
+    }
+
+    LC_API void SetLogColorTraceToAll(bool bColorTrace)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_bColorTrace = bColorTrace;
+    }
+
     LC_API void SetLogColorLevel(std::string_view sLogType, std::string_view sColorLevel)
     {
         auto it = g_logConfigMap.find(std::string(sLogType));
@@ -525,6 +629,20 @@ namespace lc
         auto it = g_logConfigMap.find(std::string(sLogType));
         if (it != g_logConfigMap.end())
             it->second.m_sColorMessage = std::string(sColorMessage);
+    }
+
+    LC_API void SetLogColorFile(std::string_view sLogType, std::string_view sColor)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorFile = std::string(sColor);
+    }
+
+    LC_API void SetLogColorTrace(std::string_view sLogType, std::string_view sColor)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorTrace = std::string(sColor);
     }
 
     LC_API void SetLogColorLevel(std::string_view sLogType, LogColor color)
@@ -576,6 +694,20 @@ namespace lc
             it->second.m_sColorMessage = internal::GetColor(color);
     }
 
+    LC_API void SetLogColorFile(std::string_view sLogType, LogColor color)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorFile = internal::GetColor(color);
+    }
+
+    LC_API void SetLogColorTrace(std::string_view sLogType, LogColor color)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorTrace = internal::GetColor(color);
+    }
+
     LC_API void SetLogColorLevel(std::string_view sLogType, LogColor color, const std::vector<LogEffect>& effects)
     {
         auto it = g_logConfigMap.find(std::string(sLogType));
@@ -623,6 +755,20 @@ namespace lc
         auto it = g_logConfigMap.find(std::string(sLogType));
         if (it != g_logConfigMap.end())
             it->second.m_sColorMessage = internal::CreateAsciiEscapeSequence(color, effects);
+    }
+
+    LC_API void SetLogColorFile(std::string_view sLogType, LogColor color, const std::vector<LogEffect>& effects)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorFile = internal::CreateAsciiEscapeSequence(color, effects);
+    }
+
+    LC_API void SetLogColorTrace(std::string_view sLogType, LogColor color, const std::vector<LogEffect>& effects)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorTrace = internal::CreateAsciiEscapeSequence(color, effects);
     }
 
     LC_API void SetLogColorLevel(std::string_view sLogType, const std::vector<LogEffect>& effects)
@@ -674,6 +820,20 @@ namespace lc
             it->second.m_sColorMessage = internal::GetEffects(effects);
     }
 
+    LC_API void SetLogColorFile(std::string_view sLogType, const std::vector<LogEffect>& effects)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorFile = internal::GetEffects(effects);
+    }
+
+    LC_API void SetLogColorTrace(std::string_view sLogType, const std::vector<LogEffect>& effects)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_sColorTrace = internal::GetEffects(effects);
+    }
+
     LC_API void SetLogOrder(std::string_view sLogType, std::vector<LogOrder> logOrder)
     {
         auto it = g_logConfigMap.find(std::string(sLogType));
@@ -719,32 +879,8 @@ namespace lc
             value.m_sFormatTrim = sFormatTrim;
     }
 
-    LC_API void SetFormat(std::string_view sLogType, std::string_view sFormat)
+    void FillOrder(const std::vector<std::pair<std::size_t, std::string>>& indexPos, std::string_view sLogType, std::string& format, std::string_view trim, std::vector<LogOrder>& logOrder)
     {
-        std::vector<std::pair<std::size_t, std::string>> indexPos;
-        for(auto key : g_availableOrderTypes)
-        {
-            std::size_t pos = sFormat.find(key);
-            if (pos != std::string::npos)
-                indexPos.push_back({pos, key});
-        }
-
-        if(indexPos.empty())
-            return;
-
-        std::ranges::sort(indexPos, std::less<>());
-        std::string format(sFormat);
-
-        auto config = internal::GetLogConfig(sLogType);
-        if(!config)
-            return;
-
-        auto trim = config->get().m_sFormatTrim;
-        if(trim.empty())
-            trim = "] ";
-
-        std::vector<LogOrder> logOrder;
-
         for(auto pair : indexPos)
         {
             if(pair.second == "{LEVEL}")
@@ -805,19 +941,46 @@ namespace lc
             else if(pair.second == "{FILE}")
             {
                 auto [infront, after] = internal::GetInfrontAndAfterTrim(format, pair.second, trim);
-                internal::SetLogStringBeforeMessage(sLogType, infront);
-                internal::SetLogStringAfterMessage(sLogType, after);
+                internal::SetLogStringBeforeFile(sLogType, infront);
+                internal::SetLogStringAfterFile(sLogType, after);
                 logOrder.emplace_back(LogOrder::File);
             }
             else if(pair.second == "{TRACE}")
             {
                 auto [infront, after] = internal::GetInfrontAndAfterTrim(format, pair.second, trim);
-                internal::SetLogStringBeforeMessage(sLogType, infront);
-                internal::SetLogStringAfterMessage(sLogType, after);
+                internal::SetLogStringBeforeTrace(sLogType, infront);
+                internal::SetLogStringAfterTrace(sLogType, after);
                 logOrder.emplace_back(LogOrder::Trace);
             }
         }
+    }
 
+    LC_API void SetFormat(std::string_view sLogType, std::string_view sFormat)
+    {
+        std::vector<std::pair<std::size_t, std::string>> indexPos;
+        for(auto key : g_availableOrderTypes)
+        {
+            std::size_t pos = sFormat.find(key);
+            if (pos != std::string::npos)
+                indexPos.push_back({pos, key});
+        }
+
+        if(indexPos.empty())
+            return;
+
+        std::ranges::sort(indexPos);
+        std::string format(sFormat);
+
+        auto config = internal::GetLogConfig(sLogType);
+        if(!config)
+            return;
+
+        auto trim = config->get().m_sFormatTrim;
+        if(trim.empty())
+            trim = "] ";
+
+        std::vector<LogOrder> logOrder;
+        FillOrder(indexPos, sLogType, format, trim, logOrder);
         SetLogOrder(sLogType, logOrder);
     }
 

@@ -6,6 +6,7 @@
 #include <source_location>
 
 #include "defines.hpp"
+#include "backtrace.hpp"
 
 namespace lc
 {
@@ -15,6 +16,7 @@ namespace lc
         std::string m_sLevel                    = "";
         std::string m_sLabel                    = "";
         std::source_location m_sourceLocation   = {};
+        Backtrace m_backtrace                   = {};
     };
 
     namespace internal
@@ -27,6 +29,7 @@ namespace lc
                 .m_sLevel = strLevel.data(),
                 .m_sLabel = strLabel.data(),
                 .m_sourceLocation = m_sourceLocation,
+                .m_backtrace = GetBacktrace(),
             };
         }
     }
