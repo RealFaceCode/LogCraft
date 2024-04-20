@@ -238,7 +238,7 @@ namespace lc::internal
 
     LC_API void WriteToConsole(std::string_view sMessage)
     {
-        std::print(sMessage);
+        std::print("{}\n", sMessage);
     }
 
     LC_API void WriteToFile(std::string_view sMessage)
