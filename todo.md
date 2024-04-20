@@ -10,11 +10,11 @@
   - [ ] Create timestamped log files
   - [ ] Create new log files when maximum line count or file size is reached
 - [ ] Adding a callstack
-  - [ ] Saving callstack for user defined log types
+  - [x] Saving callstack for user defined log types
   - [ ] write callstack tree to console/file
-    - [ ] Console
+    - [x] Console
     - [ ] File
-  - [ ] Add numbers from witch line the child func was called
+  - [x] Add numbers from witch line the child func was called
   - [ ] Add user defined format for callstack output
 - [x] Add DeInit() function
 - [x] Add lc::Log() func without StringLiteral for label

@@ -83,12 +83,22 @@ namespace lc
             std::string m_sAFile            = "";
             std::string m_sATrace           = "";
 
+            std::string m_sBTraceFunction   = "";
+            std::string m_sBTraceLine       = "";
+            std::string m_sBTraceFile       = "";
+
+            std::string m_sATraceFunction   = "";
+            std::string m_sATraceLine       = "";
+            std::string m_sATraceFile       = "";
+            
             std::string m_sFormatTrim       = "";
             std::vector<LogOrder> m_logOrder;
+            std::vector<LogOrder> m_logOrderTrace;
         };
 
         LC_API std::optional<std::reference_wrapper<LogConfig>> GetLogConfig(std::string_view sLogType);
         LC_API std::set<std::string>& GetAvailableOrders();
+        LC_API std::set<std::string>& GetAvailableOrdersTrace();
 
         LC_API void SetLogStringBeforeLevel(std::string_view sLogType, std::string_view sBLevel);
         LC_API void SetLogStringBeforeLabel(std::string_view sLogType, std::string_view sBLabel);
@@ -129,6 +139,22 @@ namespace lc
         LC_API void SetLogStringAfterMessageToAll(std::string_view sAMessage);
         LC_API void SetLogStringAfterFileToAll(std::string_view sAFile);
         LC_API void SetLogStringAfterTraceToAll(std::string_view sATrace);
+
+        LC_API void SetLogStringBeforeTraceFunction(std::string_view sLogType, std::string_view sBTraceFunction);
+        LC_API void SetLogStringBeforeTraceLine(std::string_view sLogType, std::string_view sBTraceLine);
+        LC_API void SetLogStringBeforeTraceFile(std::string_view sLogType, std::string_view sBTraceFile);
+
+        LC_API void SetLogStringAfterTraceFunction(std::string_view sLogType, std::string_view sATraceFunction);
+        LC_API void SetLogStringAfterTraceLine(std::string_view sLogType, std::string_view sATraceLine);
+        LC_API void SetLogStringAfterTraceFile(std::string_view sLogType, std::string_view sATraceFile);
+
+        LC_API void SetLogStringBeforeTraceFunctionToAll(std::string_view sBTraceFunction);
+        LC_API void SetLogStringBeforeTraceLineToAll(std::string_view sBTraceLine);
+        LC_API void SetLogStringBeforeTraceFileToAll(std::string_view sBTraceFile);
+
+        LC_API void SetLogStringAfterTraceFunctionToAll(std::string_view sATraceFunction);
+        LC_API void SetLogStringAfterTraceLineToAll(std::string_view sATraceLine);
+        LC_API void SetLogStringAfterTraceFileToAll(std::string_view sATraceFile);
     }
 
     LC_API bool AddLogType(std::string_view sLogType);
@@ -237,9 +263,17 @@ namespace lc
     LC_API void SetLogOrderToAll(std::vector<LogOrder> logOrder);
     LC_API void SetLogOrderToAll(std::initializer_list<LogOrder> logOrder);
 
+    LC_API void SetLogOrderTrace(std::string_view sLogType, std::vector<LogOrder> logOrder);
+    LC_API void SetLogOrderTrace(std::string_view sLogType, std::initializer_list<LogOrder> logOrder);
+    LC_API void SetLogOrderTraceToAll(std::vector<LogOrder> logOrder);
+    LC_API void SetLogOrderTraceToAll(std::initializer_list<LogOrder> logOrder);
+
     LC_API void SetFormatTrim(std::string_view sLogType, std::string_view sFormatTrim);
     LC_API void SetFormatTrimToAll(std::string_view sFormatTrim);
 
     LC_API void SetFormat(std::string_view sLogType, std::string_view sFormat);
     LC_API void SetFormatToAll(std::string_view sFormat);
+
+    LC_API void SetFormatTrace(std::string_view sLogType, std::string_view sFormat);
+    LC_API void SetFormatTraceToAll(std::string_view sFormat);
 }

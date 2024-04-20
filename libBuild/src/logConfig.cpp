@@ -8,7 +8,8 @@
 namespace lc
 {
     std::unordered_map<std::string, internal::LogConfig> g_logConfigMap;
-    std::set<std::string> g_availableOrderTypes;
+    std::set<std::string> g_availableOrderTypes = {"{LEVEL}", "{LABEL}", "{TIME}", "{DATE}", "{FUNC}", "{LINE}", "{MSG}", "{FILE}", "{TRACE}"};
+    std::set<std::string> g_availableOrderTypesTrace = {"{FUNC}", "{LINE}", "{FILE}"};
     
     namespace internal
     {
@@ -62,11 +63,16 @@ namespace lc
             return g_availableOrderTypes;
         }
 
-            LC_API void SetLogStringBeforeLevel(std::string_view sLogType, std::string_view sBLevel)
+        LC_API std::set<std::string>& GetAvailableOrdersTrace()
         {
-        auto it = g_logConfigMap.find(std::string(sLogType));
-        if (it != g_logConfigMap.end())
-            it->second.m_sBLevel = sBLevel;
+            return g_availableOrderTypesTrace;
+        }
+
+        LC_API void SetLogStringBeforeLevel(std::string_view sLogType, std::string_view sBLevel)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sBLevel = sBLevel;
         }
 
         LC_API void SetLogStringBeforeLabel(std::string_view sLogType, std::string_view sBLabel)
@@ -294,6 +300,84 @@ namespace lc
         {
             for (auto& [key, value] : g_logConfigMap)
                 value.m_sATrace = sATrace;
+        }
+
+        LC_API void SetLogStringBeforeTraceFunction(std::string_view sLogType, std::string_view sBTraceFunction)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sBTraceFunction = sBTraceFunction;
+        }
+
+        LC_API void SetLogStringBeforeTraceLine(std::string_view sLogType, std::string_view sBTraceLine)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sBTraceLine = sBTraceLine;
+        }
+
+        LC_API void SetLogStringBeforeTraceFile(std::string_view sLogType, std::string_view sBTraceFile)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sBTraceFile = sBTraceFile;
+        }
+
+        LC_API void SetLogStringAfterTraceFunction(std::string_view sLogType, std::string_view sATraceFunction)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sATraceFunction = sATraceFunction;
+        }
+
+        LC_API void SetLogStringAfterTraceLine(std::string_view sLogType, std::string_view sATraceLine)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sATraceLine = sATraceLine;
+        }
+
+        LC_API void SetLogStringAfterTraceFile(std::string_view sLogType, std::string_view sATraceFile)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sATraceFile = sATraceFile;
+        }
+
+        LC_API void SetLogStringBeforeTraceFunctionToAll(std::string_view sBTraceFunction)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sBTraceFunction = sBTraceFunction;
+        }
+
+        LC_API void SetLogStringBeforeTraceLineToAll(std::string_view sBTraceLine)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sBTraceLine = sBTraceLine;
+        }
+
+        LC_API void SetLogStringBeforeTraceFileToAll(std::string_view sBTraceFile)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sBTraceFile = sBTraceFile;
+        }
+
+        LC_API void SetLogStringAfterTraceFunctionToAll(std::string_view sATraceFunction)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sATraceFunction = sATraceFunction;
+        }
+
+        LC_API void SetLogStringAfterTraceLineToAll(std::string_view sATraceLine)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sATraceLine = sATraceLine;
+        }
+
+        LC_API void SetLogStringAfterTraceFileToAll(std::string_view sATraceFile)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sATraceFile = sATraceFile;
         }
     }
 
@@ -866,6 +950,38 @@ namespace lc
         }
     }
 
+    LC_API void SetLogOrderTrace(std::string_view sLogType, std::vector<LogOrder> logOrder)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+            it->second.m_logOrderTrace = logOrder;
+    }
+
+    LC_API void SetLogOrderTrace(std::string_view sLogType, std::initializer_list<LogOrder> logOrder)
+    {
+        auto it = g_logConfigMap.find(std::string(sLogType));
+        if (it != g_logConfigMap.end())
+        {
+            it->second.m_logOrderTrace.clear();
+            it->second.m_logOrderTrace.insert(it->second.m_logOrderTrace.end(), logOrder.begin(), logOrder.end());
+        }
+    }
+
+    LC_API void SetLogOrderTraceToAll(std::vector<LogOrder> logOrder)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            value.m_logOrderTrace = logOrder;
+    }
+
+    LC_API void SetLogOrderTraceToAll(std::initializer_list<LogOrder> logOrder)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+        {
+            value.m_logOrderTrace.clear();
+            value.m_logOrderTrace.insert(value.m_logOrderTrace.end(), logOrder.begin(), logOrder.end());
+        }
+    }
+
     LC_API void SetFormatTrim(std::string_view sLogType, std::string_view sFormatTrim)
     {
         auto it = g_logConfigMap.find(std::string(sLogType));
@@ -988,5 +1104,70 @@ namespace lc
     {
         for(auto& [key, value] : g_logConfigMap)
             SetFormat(key, sFormat);
+    }
+
+    void FillOrderTrace(const std::vector<std::pair<std::size_t, std::string>>& indexPos, std::string_view sLogType, std::string& format, std::string_view trim, std::vector<LogOrder>& logOrder)
+    {
+        for(auto pair : indexPos)
+        {
+            if(pair.second == "{FUNC}")
+            {
+                SetLogFunction(sLogType, true);
+                auto [infront, after] = internal::GetInfrontAndAfterTrim(format, pair.second, trim);
+                internal::SetLogStringBeforeTraceFunction(sLogType, infront);
+                internal::SetLogStringAfterTraceFunction(sLogType, after);
+                logOrder.emplace_back(LogOrder::Function);
+            }
+            else if(pair.second == "{LINE}")
+            {
+                SetLogLine(sLogType, true);
+                auto [infront, after] = internal::GetInfrontAndAfterTrim(format, pair.second, trim);
+                internal::SetLogStringBeforeTraceLine(sLogType, infront);
+                internal::SetLogStringAfterTraceLine(sLogType, after);
+                logOrder.emplace_back(LogOrder::Line);
+            }
+            else if(pair.second == "{FILE}")
+            {
+                auto [infront, after] = internal::GetInfrontAndAfterTrim(format, pair.second, trim);
+                internal::SetLogStringBeforeTraceFile(sLogType, infront);
+                internal::SetLogStringAfterTraceFile(sLogType, after);
+                logOrder.emplace_back(LogOrder::File);
+            }
+        }
+    }
+
+    LC_API void SetFormatTrace(std::string_view sLogType, std::string_view sFormatTrace)
+    {
+        std::vector<std::pair<std::size_t, std::string>> indexPos;
+        for(auto key : g_availableOrderTypes)
+        {
+            std::size_t pos = sFormatTrace.find(key);
+            if (pos != std::string::npos)
+                indexPos.push_back({pos, key});
+        }
+
+        if(indexPos.empty())
+            return;
+
+        std::ranges::sort(indexPos);
+        std::string format(sFormatTrace);
+
+        auto config = internal::GetLogConfig(sLogType);
+        if(!config)
+            return;
+
+        auto trim = config->get().m_sFormatTrim;
+        if(trim.empty())
+            trim = "] ";
+
+        std::vector<LogOrder> logOrder;
+        FillOrderTrace(indexPos, sLogType, format, trim, logOrder);
+        SetLogOrderTrace(sLogType, logOrder);
+    }
+
+    LC_API void SetFormatTraceToAll(std::string_view sFormatTrace)
+    {
+        for (auto& [key, value] : g_logConfigMap)
+            SetFormatTrace(key, sFormatTrace);
     }
 }

@@ -208,6 +208,64 @@ namespace lc::internal
         }
     }
 
+    void FillTraceFunctionToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view func, bool fileMode)
+    {
+        if(!config.m_sBTraceFunction.empty())
+            buffer.sputn(config.m_sBTraceFunction.data(), config.m_sBTraceFunction.size());
+
+        buffer.sputn(func.data(), func.size());
+
+        if(!config.m_sATraceFunction.empty())
+            buffer.sputn(config.m_sATraceFunction.data(), config.m_sATraceFunction.size());
+    }
+
+    void FillTraceLineToBuffer(std::stringbuf& buffer, const LogConfig& config, int line, bool fileMode)
+    {
+        if(!config.m_sBTraceLine.empty())
+            buffer.sputn(config.m_sBTraceLine.data(), config.m_sBTraceLine.size());
+
+        auto l = std::to_string(line);
+        buffer.sputn(l.data(), l.size());
+
+        if(!config.m_sATraceLine.empty())
+            buffer.sputn(config.m_sATraceLine.data(), config.m_sATraceLine.size());
+    }
+
+    void FillTraceFileToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view file, bool fileMode)
+    {
+        if(!config.m_sBTraceFile.empty())
+            buffer.sputn(config.m_sBTraceFile.data(), config.m_sBTraceFile.size());
+
+        buffer.sputn(file.data(), file.size());
+
+        if(!config.m_sATraceFile.empty())
+            buffer.sputn(config.m_sATraceFile.data(), config.m_sATraceFile.size());
+    }
+
+    void FillTraceDataToBuffer(std::stringbuf& buffer, const LogConfig& config, Backtrace& bt, bool fileMode)
+    {
+        for(auto i = 0; i < bt.m_nLineNumbers.size(); i++)
+        {
+            for(auto& oder : config.m_logOrderTrace)    
+            {
+                switch(oder)
+                {
+                    case LogOrder::Function:
+                        FillTraceFunctionToBuffer(buffer, config, bt.m_sFunctionNames.at(i), fileMode);
+                        break;
+                    case LogOrder::Line:
+                        FillTraceLineToBuffer(buffer, config, bt.m_nLineNumbers.at(i), fileMode);
+                        break;
+                    case LogOrder::File:
+                        FillTraceFileToBuffer(buffer, config, bt.m_sFileNames.at(i), fileMode);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    }
+
     void FillTraceToBuffer(std::stringbuf& buffer, const LogConfig& config, Backtrace bt, bool fileMode)
     {
         if(!config.m_bLogTrace)
@@ -219,19 +277,11 @@ namespace lc::internal
         if(!config.m_sBTrace.empty())
             buffer.sputn(config.m_sBTrace.data(), config.m_sBTrace.size());
 
+        TrimFunctionName(bt);
+        TrimFile(bt);
+        DelAfterMain(bt);
 
-        for(auto i = 0; i < bt.m_nLineNumbers.size(); i++) //TODO:
-        {
-            TrimFunctionName(bt);
-            TrimFile(bt);
-            DelAfterMain(bt);
-
-            buffer.sputn(bt.m_sFileNames[i].data(), bt.m_sFileNames[i].size());
-            buffer.sputn(":", 1);
-            buffer.sputn(std::to_string(bt.m_nLineNumbers[i]).data(), std::to_string(bt.m_nLineNumbers[i]).size());
-            buffer.sputn(" ", 1);
-            buffer.sputn(bt.m_sFunctionNames[i].data(), bt.m_sFunctionNames[i].size());
-        }
+        FillTraceDataToBuffer(buffer, config, bt, fileMode);
 
         if(!config.m_sATrace.empty())
             buffer.sputn(config.m_sATrace.data(), config.m_sATrace.size());
@@ -253,30 +303,39 @@ namespace lc::internal
             {
                 case LogOrder::Time:
                     FillTimeToBuffer(buffer, config, fileMode);
+                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Date:
                     FillDateToBuffer(buffer, config, fileMode);
+                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Function:
                     FillFunctionToBuffer(buffer, config, sFunction, fileMode);
+                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Line:
                     FillLineToBuffer(buffer, config, nLine, fileMode);
+                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Level:
                     FillLevelToBuffer(buffer, config, sLevel, fileMode);
+                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Label:
                     FillLabelToBuffer(buffer, config, sLabel, fileMode);
+                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Message:
                     FillMessageToBuffer(buffer, config, sMessage, fileMode);
+                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::File:
                     FillFileToBuffer(buffer, config, sFile, fileMode);
+                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Trace:
                     FillTraceToBuffer(buffer, config, bt, fileMode);
+                    //std::print("{}\n", buffer.view());
                     break;
                 default:
                     break;

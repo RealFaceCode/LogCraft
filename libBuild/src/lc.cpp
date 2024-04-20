@@ -14,11 +14,9 @@ namespace lc
         AddLogType("ERROR");
         AddLogType("CRITICAL");
 
-        auto& orderSet = internal::GetAvailableOrders();
-        orderSet = {"{LEVEL}", "{LABEL}", "{TIME}", "{DATE}", "{FUNC}", "{LINE}", "{MSG}", "{FILE}", "{TRACE}"};
-
         SetFormatTrimToAll("] }");
-        SetFormatToAll("[{LEVEL}] [LABEL:{LABEL}] [{TIME} {DATE}] [{FUNC}] [LINE:{LINE}] {MSG}\n");
+        SetFormatToAll("[{LEVEL}] [LABEL:{LABEL}] [{TIME} {DATE}] [{FUNC}] [LINE:{LINE}] {MSG}\n\tTrace:\n\t\t{TRACE}");
+        SetFormatTraceToAll("{FILE}:{LINE} {FUNC}\n");
 
         SetLogColorLevel("INFO", LogColor::White);
         SetLogColorLevel("DEBUG", LogColor::Green);
