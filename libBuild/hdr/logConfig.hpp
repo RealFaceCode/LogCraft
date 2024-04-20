@@ -19,7 +19,9 @@ namespace lc
         Line,
         Level,
         Label,
-        Message
+        Message,
+        File,
+        Trace,
     };
 
     namespace internal

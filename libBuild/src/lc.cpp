@@ -15,7 +15,7 @@ namespace lc
         AddLogType("CRITICAL");
 
         auto& orderSet = internal::GetAvailableOrders();
-        orderSet = {"{LEVEL}", "{LABEL}", "{TIME}", "{DATE}", "{FUNC}", "{LINE}", "{MSG}"};
+        orderSet = {"{LEVEL}", "{LABEL}", "{TIME}", "{DATE}", "{FUNC}", "{LINE}", "{MSG}", "{FILE}", "{TRACE}"};
 
         SetFormatTrimToAll("] }");
         SetFormatToAll("[{LEVEL}] [LABEL:{LABEL}] [{TIME} {DATE}] [{FUNC}] [LINE:{LINE}] {MSG}");

@@ -802,6 +802,20 @@ namespace lc
                 internal::SetLogStringAfterMessage(sLogType, after);
                 logOrder.emplace_back(LogOrder::Message);
             }
+            else if(pair.second == "{FILE}")
+            {
+                auto [infront, after] = internal::GetInfrontAndAfterTrim(format, pair.second, trim);
+                internal::SetLogStringBeforeMessage(sLogType, infront);
+                internal::SetLogStringAfterMessage(sLogType, after);
+                logOrder.emplace_back(LogOrder::File);
+            }
+            else if(pair.second == "{TRACE}")
+            {
+                auto [infront, after] = internal::GetInfrontAndAfterTrim(format, pair.second, trim);
+                internal::SetLogStringBeforeMessage(sLogType, infront);
+                internal::SetLogStringAfterMessage(sLogType, after);
+                logOrder.emplace_back(LogOrder::Trace);
+            }
         }
 
         SetLogOrder(sLogType, logOrder);
