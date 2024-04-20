@@ -14,8 +14,8 @@ namespace lc
         MsgServerConfig g_msgServerConfig;
         eutil::ThreadPool<LogMsg> g_threadPoolConsole;
         eutil::ThreadPool<LogMsg> g_threadPoolFile;
-        eutil::File g_ConfigFile;
-        eutil::File g_LogFile;
+        eutil::File g_configFile;
+        eutil::File g_logFile;
 
         LC_API void SartMsgServer()
         {
@@ -52,7 +52,12 @@ namespace lc
 
             std::filesystem::path configPath = logCraftConfig.m_LogRootPath;
             configPath /= "config.log";
-            g_ConfigFile.open();
+
+            if(!eutil::FileExists(configPath))
+                eutil::CreateFile(configPath);
+
+            g_configFile.setMode(eutil::FileOpenMode::ReadWrite); //TODO: finish this
+            g_configFile.open();
 
             g_threadPoolFile.setThreadCount(g_msgServerConfig.m_nMaxThreads);
             g_threadPoolFile.start();

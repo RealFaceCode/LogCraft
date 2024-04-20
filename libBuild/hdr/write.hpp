@@ -4,7 +4,6 @@
 #include <string_view>
 
 #include "defines.hpp"
-#include <format>
 
 namespace lc::internal
 {

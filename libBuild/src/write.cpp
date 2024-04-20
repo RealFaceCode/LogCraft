@@ -2,6 +2,7 @@
 
 #include <sstream>
 #include <util.hpp>
+#include <print>
 #include "logConfig.hpp"
 #include "logCraftConfig.hpp"
 
@@ -237,7 +238,7 @@ namespace lc::internal
 
     LC_API void WriteToConsole(std::string_view sMessage)
     {
-        std::printf("%s\n", sMessage.data());
+        std::print(sMessage);
     }
 
     LC_API void WriteToFile(std::string_view sMessage)
