@@ -365,6 +365,5 @@ namespace lc::internal
     LC_API void WriteToFile(FileObserver& fOb, std::string_view sMessage)
     {
         fOb.write(sMessage.data(), sMessage.size());
-        fOb.write("\n", 1);
     }
 }
