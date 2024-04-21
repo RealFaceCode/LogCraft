@@ -26,4 +26,19 @@ namespace lc
     {
         internal::g_logCraftConfig.m_LogRootPath = path;
     }
+
+    LC_API void SetMaxSizeMB(std::size_t nMaxSizeMB)
+    {
+        internal::g_logCraftConfig.m_nMaxSizeMB = nMaxSizeMB;
+    }
+
+    LC_API void SetMaxFiles(std::size_t nMaxFiles)
+    {
+        internal::g_logCraftConfig.m_nMaxFiles = nMaxFiles;
+    }
+
+    LC_API void SetMaxAgeDays(std::size_t nMaxAgeDays)
+    {
+        internal::g_logCraftConfig.m_nMaxAgeDays = nMaxAgeDays;
+    }
 }

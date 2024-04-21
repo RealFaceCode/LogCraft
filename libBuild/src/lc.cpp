@@ -3,6 +3,7 @@
 #include "logcraftConfig.hpp"
 #include "logColor.hpp"
 #include "msgServer.hpp"
+#include "fileObserver.hpp"
 
 namespace lc
 {
@@ -30,5 +31,7 @@ namespace lc
     LC_API void DeInit()
     {
         internal::StopMsgServer();
+        auto& fOb = internal::GetFileObserver();
+        fOb.close();
     }
 }
