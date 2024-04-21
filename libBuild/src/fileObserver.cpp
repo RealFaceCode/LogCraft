@@ -64,7 +64,6 @@ namespace lc
             fileName.append(eutil::getCurrentTime("%Y%m%d_%H%M%S"));
             fileName.append(".log");
             m_activeFilePath = m_rootPath / fileName;
-            std::print("Active file path: {}\n", m_activeFilePath.string());
 
             if(eutil::CreateFile(m_activeFilePath))
             {
