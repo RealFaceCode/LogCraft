@@ -263,6 +263,9 @@ namespace lc::internal
                         break;
                 }
             }
+
+            if(!config.m_sLeftOverTrace.empty())
+                buffer.sputn(config.m_sLeftOverTrace.data(), config.m_sLeftOverTrace.size());
         }
     }
 
@@ -303,44 +306,38 @@ namespace lc::internal
             {
                 case LogOrder::Time:
                     FillTimeToBuffer(buffer, config, fileMode);
-                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Date:
                     FillDateToBuffer(buffer, config, fileMode);
-                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Function:
                     FillFunctionToBuffer(buffer, config, sFunction, fileMode);
-                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Line:
                     FillLineToBuffer(buffer, config, nLine, fileMode);
-                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Level:
                     FillLevelToBuffer(buffer, config, sLevel, fileMode);
-                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Label:
                     FillLabelToBuffer(buffer, config, sLabel, fileMode);
-                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Message:
                     FillMessageToBuffer(buffer, config, sMessage, fileMode);
-                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::File:
                     FillFileToBuffer(buffer, config, sFile, fileMode);
-                    //std::print("{}\n", buffer.view());
                     break;
                 case LogOrder::Trace:
                     FillTraceToBuffer(buffer, config, bt, fileMode);
-                    //std::print("{}\n", buffer.view());
                     break;
                 default:
                     break;
             }
         }
+
+        if(!config.m_sLeftOver.empty())
+            buffer.sputn(config.m_sLeftOver.data(), config.m_sLeftOver.size());
     }
 
 #pragma endregion FillBuffer

@@ -16,8 +16,8 @@ namespace lc
         AddLogType("CRITICAL");
 
         SetFormatTrimToAll("] }");
-        SetFormatToAll("[{LEVEL}] [LABEL:{LABEL}] [{TIME} {DATE}] [{FUNC}] [LINE:{LINE}] {MSG}\n\tTrace:\n\t\t{TRACE}");
-        SetFormatTraceToAll("{FILE}:{LINE} {FUNC}\n");
+        SetFormatToAll("[{LEVEL}] [LABEL:{LABEL}] [{TIME} {DATE}] [{FUNC}] [LINE:{LINE}] {MSG}\n\tTrace:\n{TRACE}");
+        SetFormatTraceToAll("\t\t{FILE}:{LINE} {FUNC}\n");
 
         SetLogColorLevel("INFO", LogColor::White);
         SetLogColorLevel("DEBUG", LogColor::Green);

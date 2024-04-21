@@ -379,6 +379,32 @@ namespace lc
             for (auto& [key, value] : g_logConfigMap)
                 value.m_sATraceFile = sATraceFile;
         }
+
+        LC_API void SetLogStringLeftOver(std::string_view sLogType, std::string_view sLeftOver)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sLeftOver = sLeftOver;
+        }
+
+        LC_API void SetLogStringLeftOverToAll(std::string_view sLeftOver)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sLeftOver = sLeftOver;
+        }
+
+        LC_API void SetLogStringLeftOverTrace(std::string_view sLogType, std::string_view sLeftOverTrace)
+        {
+            auto it = g_logConfigMap.find(std::string(sLogType));
+            if (it != g_logConfigMap.end())
+                it->second.m_sLeftOverTrace = sLeftOverTrace;
+        }
+
+        LC_API void SetLogStringLeftOverTraceToAll(std::string_view sLeftOverTrace)
+        {
+            for (auto& [key, value] : g_logConfigMap)
+                value.m_sLeftOverTrace = sLeftOverTrace;
+        }
     }
 
     LC_API bool AddLogType(std::string_view sLogType)
@@ -1069,6 +1095,11 @@ namespace lc
                 logOrder.emplace_back(LogOrder::Trace);
             }
         }
+
+        if(!format.empty())
+        {
+            internal::SetLogStringLeftOver(sLogType, format);
+        }
     }
 
     LC_API void SetFormat(std::string_view sLogType, std::string_view sFormat)
@@ -1133,6 +1164,11 @@ namespace lc
                 internal::SetLogStringAfterTraceFile(sLogType, after);
                 logOrder.emplace_back(LogOrder::File);
             }
+        }
+
+        if(!format.empty())
+        {
+            internal::SetLogStringLeftOverTrace(sLogType, format);
         }
     }
 

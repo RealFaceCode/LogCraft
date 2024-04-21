@@ -90,6 +90,9 @@ namespace lc
             std::string m_sATraceFunction   = "";
             std::string m_sATraceLine       = "";
             std::string m_sATraceFile       = "";
+
+            std::string m_sLeftOver         = "";
+            std::string m_sLeftOverTrace    = "";
             
             std::string m_sFormatTrim       = "";
             std::vector<LogOrder> m_logOrder;
@@ -155,6 +158,12 @@ namespace lc
         LC_API void SetLogStringAfterTraceFunctionToAll(std::string_view sATraceFunction);
         LC_API void SetLogStringAfterTraceLineToAll(std::string_view sATraceLine);
         LC_API void SetLogStringAfterTraceFileToAll(std::string_view sATraceFile);
+
+        LC_API void SetLogStringLeftOver(std::string_view sLogType, std::string_view sLeftOver);
+        LC_API void SetLogStringLeftOverToAll(std::string_view sLeftOver);
+
+        LC_API void SetLogStringLeftOverTrace(std::string_view sLogType, std::string_view sLeftOverTrace);
+        LC_API void SetLogStringLeftOverTraceToAll(std::string_view sLeftOverTrace);
     }
 
     LC_API bool AddLogType(std::string_view sLogType);
