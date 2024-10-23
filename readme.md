@@ -20,7 +20,7 @@ LogCraft is licensed under the MIT License, which allows for free use, modificat
 
 ## Documentation
 
-For detailed information on how to use LogCraft, refer to the `features.md` and `performance.md` files. These documents provide insights into the capabilities of LogCraft and how to optimize its performance for your specific use case.
+For detailed information on how to use LogCraft, refer to the `how_to_use.md` file. This document provide insights into the capabilities of LogCraft and how to optimize its performance for your specific use case.
 
 ## Roadmap
 
