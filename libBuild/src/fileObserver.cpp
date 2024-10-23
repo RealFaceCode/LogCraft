@@ -1,10 +1,9 @@
 #include "fileObserver.hpp"
-
-
 #include "util.hpp"
 #include <print>
 #include <filesystem>
 #include <string>
+#include "fioc.hpp"
 
 namespace lc
 {
@@ -14,13 +13,13 @@ namespace lc
 
     LC_API void FileObserver::open()
     {
-        if(!eutil::FileExists(m_rootPath))
-            eutil::CreateDirectory(m_rootPath);
+        if(!eutil::fioc::FileExists(m_rootPath.string().c_str()))
+            eutil::fioc::CreateDirectoryRecursive(m_rootPath.string().c_str());
 
         m_trackerFilePath = m_rootPath / m_trackerFilePath;
 
-        if(!eutil::FileExists(m_trackerFilePath))
-            eutil::CreateFile(m_trackerFilePath);
+        if(!eutil::fioc::FileExists(m_trackerFilePath.string().c_str()))
+            eutil::fioc::CreateFile(m_trackerFilePath.string().c_str());
 
         fopen_s(&m_trackerFile, m_trackerFilePath.string().c_str(), "r+");
         fseek(m_trackerFile, 0, SEEK_END);
@@ -51,7 +50,7 @@ namespace lc
                 m_files.push_back(path);
             }
 
-            if(eutil::FileExists(m_files.back()))
+            if(eutil::fioc::FileExists(m_files.back().string().c_str()))
             {
                 m_activeFilePath = m_files.back();
                 fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
@@ -65,7 +64,7 @@ namespace lc
             fileName.append(".log");
             m_activeFilePath = m_rootPath / fileName;
 
-            if(eutil::CreateFile(m_activeFilePath))
+            if(eutil::fioc::CreateFile(m_activeFilePath.string().c_str()))
             {
                 m_files.push_back(m_activeFilePath);
                 fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
@@ -131,7 +130,7 @@ namespace lc
         if(m_nMaxSizeMB == 0)
             return false;
 
-        if(!eutil::FileExists(m_activeFilePath))
+        if(!eutil::fioc::FileExists(m_activeFilePath.string().c_str()))
             return false;
 
         return std::filesystem::file_size(m_activeFilePath) >= m_nMaxSizeMB * 1024 * 1024;
@@ -160,7 +159,7 @@ namespace lc
         m_activeFilePath = m_rootPath / fileName;
 
         m_files.push_back(m_activeFilePath.string());
-        eutil::CreateFile(m_activeFilePath);
+        eutil::fioc::CreateFile(m_activeFilePath.string().c_str());
         fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
     }
 }
