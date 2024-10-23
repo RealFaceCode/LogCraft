@@ -4,7 +4,6 @@
 
 #include "write.hpp"
 #include "logConfig.hpp"
-#include "file.hpp"
 #include "logcraftConfig.hpp"
 
 namespace lc
