@@ -17,23 +17,23 @@ namespace lc::internal
         if(!config.m_bLogTime)
             return;
 
-        if(config.m_bColorTime && !fileMode)
-            buffer.sputn(config.m_sColorTime.data(), config.m_sColorTime.size());
-
         if(!config.m_sBTime.empty())
             buffer.sputn(config.m_sBTime.data(), config.m_sBTime.size());
 
+        if(config.m_bColorTime && !fileMode)
+            buffer.sputn(config.m_sColorTime.data(), config.m_sColorTime.size());
+
         auto time = eutil::getCurrentTime(config.m_sLogTimeFormat);
         buffer.sputn(time.data(), time.size());
-
-        if(!config.m_sATime.empty())
-            buffer.sputn(config.m_sATime.data(), config.m_sATime.size());
 
         if(config.m_bColorTime && !fileMode)
         {
             auto color = internal::GetResetColor();
             buffer.sputn(color.data(), color.size());
         }
+
+        if(!config.m_sATime.empty())
+            buffer.sputn(config.m_sATime.data(), config.m_sATime.size());
     }
 
     void FillDateToBuffer(std::stringbuf& buffer, const LogConfig& config, bool fileMode)
@@ -41,23 +41,23 @@ namespace lc::internal
         if(!config.m_bLogDate)
             return;
 
-        if(config.m_bColorDate && !fileMode)
-            buffer.sputn(config.m_sColorDate.data(), config.m_sColorDate.size());
-
         if(!config.m_sBDate.empty())
             buffer.sputn(config.m_sBDate.data(), config.m_sBDate.size());
 
+        if(config.m_bColorDate && !fileMode)
+            buffer.sputn(config.m_sColorDate.data(), config.m_sColorDate.size());
+
         auto date = eutil::getCurrentTime(config.m_sLogDateFormat);
         buffer.sputn(date.data(), date.size());
-
-        if(!config.m_sADate.empty())
-            buffer.sputn(config.m_sADate.data(), config.m_sADate.size());
 
         if(config.m_bColorDate && !fileMode)
         {
             auto color = internal::GetResetColor();
             buffer.sputn(color.data(), color.size());
         }
+
+        if(!config.m_sADate.empty())
+            buffer.sputn(config.m_sADate.data(), config.m_sADate.size());
     }
 
     void FillFunctionToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sFunction, bool fileMode)
@@ -65,22 +65,22 @@ namespace lc::internal
         if(!config.m_bLogFunction)
             return;
 
-        if(config.m_bColorFunction && !fileMode)
-            buffer.sputn(config.m_sColorFunction.data(), config.m_sColorFunction.size());
-
         if(!config.m_sBFunction.empty())
             buffer.sputn(config.m_sBFunction.data(), config.m_sBFunction.size());
 
-        buffer.sputn(sFunction.data(), sFunction.size());
+        if(config.m_bColorFunction && !fileMode)
+            buffer.sputn(config.m_sColorFunction.data(), config.m_sColorFunction.size());
 
-        if(!config.m_sAFunction.empty())
-            buffer.sputn(config.m_sAFunction.data(), config.m_sAFunction.size());
+        buffer.sputn(sFunction.data(), sFunction.size());
 
         if(config.m_bColorFunction && !fileMode)
         {
             auto color = internal::GetResetColor();
             buffer.sputn(color.data(), color.size());
         }
+
+        if(!config.m_sAFunction.empty())
+            buffer.sputn(config.m_sAFunction.data(), config.m_sAFunction.size());
     }
 
     void FillLineToBuffer(std::stringbuf& buffer, const LogConfig& config, int nLine, bool fileMode)
@@ -88,22 +88,22 @@ namespace lc::internal
         if(!config.m_bLogLine)
             return;
 
-        if(config.m_bColorLine && !fileMode)
-            buffer.sputn(config.m_sColorLine.data(), config.m_sColorLine.size());
-
         if(!config.m_sBLine.empty())
             buffer.sputn(config.m_sBLine.data(), config.m_sBLine.size());
 
-        buffer.sputn(std::to_string(nLine).data(), std::to_string(nLine).size());
+        if(config.m_bColorLine && !fileMode)
+            buffer.sputn(config.m_sColorLine.data(), config.m_sColorLine.size());
 
-        if(!config.m_sALine.empty())
-            buffer.sputn(config.m_sALine.data(), config.m_sALine.size());
+        buffer.sputn(std::to_string(nLine).data(), std::to_string(nLine).size());
 
         if(config.m_bColorLine && !fileMode)
         {
             auto color = internal::GetResetColor();
             buffer.sputn(color.data(), color.size());
         }
+
+        if(!config.m_sALine.empty())
+            buffer.sputn(config.m_sALine.data(), config.m_sALine.size());
     }
 
     void FillLevelToBuffer(std::stringbuf& buffer, const LogConfig& config, std::string_view sLevel, bool fileMode)
