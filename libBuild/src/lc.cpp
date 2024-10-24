@@ -7,8 +7,17 @@
 
 namespace lc
 {
+    bool Init_LC = false;
+    bool DeInit_LC = false;
+
     LC_API void Init()
     {
+        if (Init_LC)
+            return;
+
+        Init_LC = true;
+        DeInit_LC = false;
+
         AddLogType("INFO");
         AddLogType("DEBUG");
         AddLogType("WARNING");
@@ -30,6 +39,12 @@ namespace lc
 
     LC_API void DeInit()
     {
+        if (DeInit_LC)
+            return;
+
+        DeInit_LC = true;
+        Init_LC = false;
+        
         internal::StopMsgServer();
         auto& fOb = internal::GetFileObserver();
         fOb.close();
