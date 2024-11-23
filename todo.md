@@ -3,6 +3,7 @@
 - [ ] Add testing
 - [ ] Add colorization for user-defined areas in message section
 - [x] Add documentation
+- [x] Add a How to use file
 
 ## LogCraft v0.2.0
 
