@@ -614,6 +614,104 @@ namespace lc
     LC_API void SetLogFunctionToAll(bool bLogFunction);
 
     /**
+     * @brief Sets whether to log the line number for a given log type.
+     * 
+     * @param sLogType The type of log.
+     * @param bLogLine Whether to log the line number.
+     */
+    LC_API void SetLogLine(std::string_view sLogType, bool bLogLine);
+
+    /**
+     * @brief Sets whether to log the line number for all log types.
+     * 
+     * @param bLogLine Whether to log the line number.
+     */
+    LC_API void SetLogLineToAll(bool bLogLine);
+
+    /**
+     * @brief Sets whether to log the log level for a given log type.
+     * 
+     * @param sLogType The type of log.
+     * @param bLogLevel Whether to log the log level.
+     */
+    LC_API void SetLogLevel(std::string_view sLogType, bool bLogLevel);
+
+    /**
+     * @brief Sets whether to log the log level for all log types.
+     * 
+     * @param bLogLevel Whether to log the log level.
+     */
+    LC_API void SetLogLevelToAll(bool bLogLevel);
+
+    /**
+     * @brief Sets whether to log the log label for a given log type.
+     * 
+     * @param sLogType The type of log.
+     * @param bLogLabel Whether to log the log label.
+     */
+    LC_API void SetLogMessage(std::string_view sLogType, bool bLogMessage);
+
+    /**
+     * @brief Sets whether to log the log label for all log types.
+     * 
+     * @param bLogMessage Whether to log the log label.
+     */
+    LC_API void SetLogMessageToAll(bool bLogMessage);
+
+    /**
+     * @brief Sets whether to log the log file name for a given log type.
+     * 
+     * @param sLogType The type of log.
+     * @param bLogFile Whether to log the log file name.
+     */
+    LC_API void SetLogFile(std::string_view sLogType, bool bLogFile);
+
+    /**
+     * @brief Sets whether to log the log file name for all log types.
+     * 
+     * @param bLogFile Whether to log the log file name.
+     */
+    LC_API void SetLogFileToAll(bool bLogFile);
+
+    /**
+     * @brief Sets whether to log the log trace for a given log type.
+     * 
+     * @param sLogType The type of log.
+     * @param bLogTrace Whether to log the log trace.
+     */
+    LC_API void SetLogTrace(std::string_view sLogType, bool bLogTrace);
+
+    /**
+     * @brief Sets whether to log the log trace for all log types.
+     * 
+     * @param bLogTrace Whether to log the log trace.
+     */
+    LC_API void SetLogTraceToAll(bool bLogTrace);
+
+    /**
+     * @brief Sets the log file path for a given log type.
+     * 
+     * @param sLogType The type of log.
+     * @param sLogFilePath The log file path.
+     */
+    LC_API void SetLogFilePath(std::string_view sLogType, std::string_view sLogFilePath);
+
+    /**
+     * @brief Sets the log file path for all log types.
+     * 
+     * @param sLogFilePath The log file path.
+     */
+    LC_API void SetLogTimeFormat(std::string_view sLogType, std::string_view sLogTimeFormat);
+
+    /**
+     * @brief Sets the log time format for a given log type.
+     * 
+     * @param sLogType The type of log.
+     * @param sLogTimeFormat The log time format.
+     */
+    LC_API void SetLogDateFormat(std::string_view sLogType, std::string_view sLogDateFormat);
+
+    /**
      * @brief Sets whether to color the log level for a given log type.
      * 
      * @param sLogType The type of log.
