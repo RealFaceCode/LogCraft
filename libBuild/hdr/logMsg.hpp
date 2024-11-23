@@ -10,6 +10,11 @@
 
 namespace lc
 {
+    /** 
+     * @brief Log message details
+     * 
+     * @note Contains the message, level, label, source location, and backtrace.
+     */
     struct LC_API LogMsg
     {
         std::string m_strMsg                    = "";
@@ -21,6 +26,11 @@ namespace lc
 
     namespace internal
     {   
+        /** 
+         * @brief Create a log message
+         * 
+         * @note Formats the message with provided arguments and captures the backtrace.
+         */
         template<typename... Args>
         LogMsg CreateLogMsg(std::string_view strMsg, std::string_view strLevel, std::string_view strLabel, const std::source_location& m_sourceLocation, const Args&... args)
         {

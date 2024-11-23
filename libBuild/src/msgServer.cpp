@@ -15,7 +15,7 @@ namespace lc
         eutil::ThreadPool<LogMsg> g_threadPoolFile;
         FileObserver g_fileObserver;
 
-        LC_API void SartMsgServer()
+        LC_API void StartMsgServer()
         {
             g_threadPoolConsole.setTaskFunc([](const LogMsg& msg) -> std::optional<int>
             {

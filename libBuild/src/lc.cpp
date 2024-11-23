@@ -34,7 +34,7 @@ namespace lc
         SetLogColorLevel("ERROR", LogColor::Red);
         SetLogColorLevel("CRITICAL", LogColor::LightMagenta, {LogEffect::Blink});
 
-        internal::SartMsgServer();
+        internal::StartMsgServer();
     }
 
     LC_API void DeInit()
