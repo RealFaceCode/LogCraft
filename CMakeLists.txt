@@ -23,7 +23,35 @@ endif()
 
 file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS  "libBuild/src/*.cpp")
 
-add_subdirectory(thirdparty/eutil)
+include(FetchContent)
+
+# Pfad zur Bibliothek
+set(EUTIL_LIB_DIR "${CMAKE_SOURCE_DIR}/thirdparty/eUtil")
+
+# Überprüfen, ob das Verzeichnis existiert
+if(NOT EXISTS "${EUTIL_LIB_DIR}/CMakeLists.txt")
+    message(STATUS "Library 'eUtil' not found. Fetching...")
+
+    FetchContent_Declare(
+        eUtil
+        GIT_REPOSITORY https://github.com/RealFaceCode/eUtil.git
+        GIT_TAG main
+        SOURCE_DIR ${EUTIL_LIB_DIR}
+    )
+
+    FetchContent_MakeAvailable(eUtil)
+    message(STATUS "Library 'eUtil' fetched.")
+else()
+    message(STATUS "Library 'eUtil' already exists.")
+    message(STATUS "Try to fetch updates...")
+
+    execute_process(
+        COMMAND git pull
+        WORKING_DIRECTORY ${EUTIL_LIB_DIR}
+    )
+endif()
+
+add_subdirectory(${EUTIL_LIB_DIR})
 
 if(NOT TARGET ${PROJECT_NAME})
     add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
