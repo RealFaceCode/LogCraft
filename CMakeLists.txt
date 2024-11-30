@@ -36,6 +36,11 @@ if(NOT EXISTS "${EUTIL_LIB_DIR}/CMakeLists.txt")
         GIT_TAG main
         SOURCE_DIR ${EUTIL_LIB_DIR}
     )
+
+    if(NOT eUtil_POPULATED)
+        FetchContent_Populate(eUtil)
+    endif()
+
     message(STATUS "Library 'eUtil' fetched.")
 else()
     message(STATUS "Library 'eUtil' already exists.")
