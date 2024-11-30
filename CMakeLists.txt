@@ -53,7 +53,7 @@ else()
 endif()
 
 if(NOT TARGET eUtil)
-    add_subdirectory(${EUTIL_LIB_DIR})
+    add_subdirectory(${EUTIL_LIB_DIR} ${CMAKE_CURRENT_BINARY_DIR}/eUtil)
 endif()
 
 if(NOT TARGET ${PROJECT_NAME})
