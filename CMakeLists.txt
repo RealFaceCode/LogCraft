@@ -40,8 +40,6 @@ if(NOT EXISTS "${EUTIL_LIB_DIR}/CMakeLists.txt")
     )
     FetchContent_MakeAvailable(eUtil)
     message(STATUS "Library 'eUtil' fetched.")
-
-    add_subdirectory(${EUTIL_LIB_DIR})
 else()
     message(STATUS "Library 'eUtil' already exists.")
     message(STATUS "Try to fetch updates...")
@@ -52,6 +50,7 @@ else()
     )
 endif()
 
+add_subdirectory(${EUTIL_LIB_DIR})
 
 if(NOT TARGET ${PROJECT_NAME})
     add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
