@@ -50,7 +50,9 @@ else()
     )
 endif()
 
-add_subdirectory(${EUTIL_LIB_DIR})
+if(NOT TARGET eUtil)
+    add_subdirectory(${EUTIL_LIB_DIR})
+endif()
 
 if(NOT TARGET ${PROJECT_NAME})
     add_library(${PROJECT_NAME} SHARED ${SOURCE_FILES})
