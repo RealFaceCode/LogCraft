@@ -13,16 +13,13 @@ namespace lc
 
     LC_API void FileObserver::open()
     {
-        if(!eutil::fioc::FileExists(m_rootPath.string().c_str()))
-        {
-            eutil::fioc::CreateDirectoryRecursive(m_rootPath.string().c_str());
-            eutil::fioc::CreateFile(m_trackerFilePath.string().c_str());
-        }
+        if(!eutil::fioc::DirectoryExists(m_rootPath))
+            eutil::fioc::CreateDirectoryRecursive(m_rootPath);
 
         m_trackerFilePath = m_rootPath / m_trackerFilePath;
 
-        if(!eutil::fioc::FileExists(m_trackerFilePath.string().c_str()))
-            eutil::fioc::CreateFile(m_trackerFilePath.string().c_str());
+        if(!eutil::fioc::FileExists(m_trackerFilePath))
+            eutil::fioc::CreateFile(m_trackerFilePath);
 
         fopen_s(&m_trackerFile, m_trackerFilePath.string().c_str(), "r+");
         fseek(m_trackerFile, 0, SEEK_END);
@@ -53,7 +50,7 @@ namespace lc
                 m_files.push_back(path);
             }
 
-            if(eutil::fioc::FileExists(m_files.back().string().c_str()))
+            if(eutil::fioc::FileExists(m_files.back()))
             {
                 m_activeFilePath = m_files.back();
                 fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
@@ -67,7 +64,7 @@ namespace lc
             fileName.append(".log");
             m_activeFilePath = m_rootPath / fileName;
 
-            if(eutil::fioc::CreateFile(m_activeFilePath.string().c_str()))
+            if(eutil::fioc::CreateFile(m_activeFilePath))
             {
                 m_files.push_back(m_activeFilePath);
                 fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
@@ -162,7 +159,7 @@ namespace lc
         m_activeFilePath = m_rootPath / fileName;
 
         m_files.push_back(m_activeFilePath.string());
-        eutil::fioc::CreateFile(m_activeFilePath.string().c_str());
+        eutil::fioc::CreateFile(m_activeFilePath);
         fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
     }
 }
