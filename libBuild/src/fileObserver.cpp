@@ -14,7 +14,10 @@ namespace lc
     LC_API void FileObserver::open()
     {
         if(!eutil::fioc::FileExists(m_rootPath.string().c_str()))
+        {
             eutil::fioc::CreateDirectoryRecursive(m_rootPath.string().c_str());
+            eutil::fioc::CreateFile(m_trackerFilePath.string().c_str());
+        }
 
         m_trackerFilePath = m_rootPath / m_trackerFilePath;
 
