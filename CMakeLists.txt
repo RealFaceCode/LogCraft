@@ -25,10 +25,8 @@ file(GLOB_RECURSE SOURCE_FILES CONFIGURE_DEPENDS  "libBuild/src/*.cpp")
 
 include(FetchContent)
 
-# Pfad zur Bibliothek
 set(EUTIL_LIB_DIR "${CMAKE_SOURCE_DIR}/thirdparty/eUtil")
 
-# Überprüfen, ob das Verzeichnis existiert
 if(NOT EXISTS "${EUTIL_LIB_DIR}/CMakeLists.txt")
     message(STATUS "Library 'eUtil' not found. Fetching...")
 
