@@ -2,7 +2,7 @@
 
 #include <cstdint>
 
-#include "threadPool.hpp"
+#include "eutil/thread/threadPool.hpp"
 #include "defines.hpp"
 #include "logMsg.hpp"
 
@@ -44,7 +44,7 @@ namespace lc
          * 
          * @note This function returns the thread pool used for terminal logging.
          */
-        LC_API eutil::ThreadPool<LogMsg>& GetThreadPoolTerminal();
+        LC_API util::ThreadPool<LogMsg>& GetThreadPoolTerminal();
 
         /**
          * @brief Gets the thread pool for file logging.
@@ -53,7 +53,7 @@ namespace lc
          * 
          * @note This function returns the thread pool used for file logging.
          */
-        LC_API eutil::ThreadPool<LogMsg>& GetThreadPoolFile();
+        LC_API util::ThreadPool<LogMsg>& GetThreadPoolFile();
 
         /**
          * @brief Gets the file observer.

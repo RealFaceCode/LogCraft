@@ -11,8 +11,8 @@ namespace lc
     namespace internal
     {
         MsgServerConfig g_msgServerConfig;
-        eutil::ThreadPool<LogMsg> g_threadPoolConsole;
-        eutil::ThreadPool<LogMsg> g_threadPoolFile;
+        util::ThreadPool<LogMsg> g_threadPoolConsole;
+        util::ThreadPool<LogMsg> g_threadPoolFile;
         FileObserver g_fileObserver;
 
         LC_API void StartMsgServer()
@@ -64,12 +64,12 @@ namespace lc
             g_threadPoolFile.stop();
         }
 
-        LC_API eutil::ThreadPool<LogMsg>& GetThreadPoolTerminal()
+        LC_API util::ThreadPool<LogMsg>& GetThreadPoolTerminal()
         {
             return g_threadPoolConsole;
         }
 
-        LC_API eutil::ThreadPool<LogMsg>& GetThreadPoolFile()
+        LC_API util::ThreadPool<LogMsg>& GetThreadPoolFile()
         {
             return g_threadPoolFile;
         }

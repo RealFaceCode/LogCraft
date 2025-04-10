@@ -1,9 +1,11 @@
 #include "fileObserver.hpp"
-#include "util.hpp"
+
 #include <print>
 #include <filesystem>
 #include <string>
-#include "fioc.hpp"
+
+#include "eutil/filesystem/FileIOGeneric.hpp"
+#include "eutil/time/Time.hpp"
 
 namespace lc
 {
@@ -13,27 +15,27 @@ namespace lc
 
     LC_API void FileObserver::open()
     {
-        if(!eutil::fioc::DirectoryExists(m_rootPath))
-            eutil::fioc::CreateDirectoryRecursive(m_rootPath);
+        if(!util::DirectoryExists(m_rootPath))
+            util::CreateDirectorys(m_rootPath);
 
         m_trackerFilePath = m_rootPath / m_trackerFilePath;
 
-        if(!eutil::fioc::FileExists(m_trackerFilePath))
-            eutil::fioc::CreateFile(m_trackerFilePath);
+        if(!util::FileExist(m_trackerFilePath))
+            util::CreateNewFile(m_trackerFilePath);
 
-        fopen_s(&m_trackerFile, m_trackerFilePath.string().c_str(), "r+");
-        fseek(m_trackerFile, 0, SEEK_END);
+        ::fopen_s(&m_trackerFile, m_trackerFilePath.string().c_str(), "r+");
+        ::fseek(m_trackerFile, 0, SEEK_END);
         auto size = ftell(m_trackerFile);
-        fseek(m_trackerFile, 0, SEEK_SET);
+        ::fseek(m_trackerFile, 0, SEEK_SET);
 
         std::vector<uint8_t> buffer(size);
-        fread(buffer.data(), 1, size, m_trackerFile);
+        ::fread(buffer.data(), 1, size, m_trackerFile);
         uint64_t offset = 0;
 
         if(size != 0)
         {
             uint64_t count;
-            memcpy(&count, buffer.data(), sizeof(uint64_t));
+            ::memcpy(&count, buffer.data(), sizeof(uint64_t));
             offset += sizeof(uint64_t);
 
             for(size_t i = 0; i < count; ++i)
@@ -44,34 +46,34 @@ namespace lc
                 std::string path;
                 path.resize(len);
 
-                memcpy(path.data(), buffer.data() + offset, len);
+                ::memcpy(path.data(), buffer.data() + offset, len);
                 offset += len;
 
                 m_files.push_back(path);
             }
 
-            if(eutil::fioc::FileExists(m_files.back()))
+            if(util::FileExist(m_files.back()))
             {
                 m_activeFilePath = m_files.back();
-                fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
+                ::fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
                 switchActiveFile();
             }
         }
         else
         {
             std::string fileName = "log";
-            fileName.append(eutil::getCurrentTime("%Y%m%d_%H%M%S"));
+            fileName.append(util::getCurrentTime("%Y%m%d_%H%M%S"));
             fileName.append(".log");
             m_activeFilePath = m_rootPath / fileName;
 
-            if(eutil::fioc::CreateFile(m_activeFilePath))
+            if(util::CreateNewFile(m_activeFilePath))
             {
                 m_files.push_back(m_activeFilePath);
-                fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
+                ::fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
             }
         }
 
-        fclose(m_trackerFile);
+        ::fclose(m_trackerFile);
     }
 
     LC_API void FileObserver::write(const void* data, std::size_t size)
@@ -79,25 +81,25 @@ namespace lc
         if(m_currentFile)
         {
             switchActiveFile();
-            fwrite(data, 1, size, m_currentFile);
+            ::fwrite(data, 1, size, m_currentFile);
         }
     }
 
     LC_API void FileObserver::close()
     {
-        fopen_s(&m_trackerFile, m_trackerFilePath.string().c_str(), "w");
+        ::fopen_s(&m_trackerFile, m_trackerFilePath.string().c_str(), "w");
         uint64_t count = m_files.size();
-        fwrite(&count, sizeof(uint64_t), 1, m_trackerFile);
+        ::fwrite(&count, sizeof(uint64_t), 1, m_trackerFile);
 
         for(const auto& file : m_files)
         {
             uint64_t len = file.string().size();
-            fwrite(&len, sizeof(uint64_t), 1, m_trackerFile);
-            fwrite(file.string().c_str(), len, 1, m_trackerFile);
+            ::fwrite(&len, sizeof(uint64_t), 1, m_trackerFile);
+            ::fwrite(file.string().c_str(), len, 1, m_trackerFile);
         }
 
-        fflush(m_trackerFile);  
-        fclose(m_currentFile);
+        ::fflush(m_trackerFile);  
+        ::fclose(m_currentFile);
     }
 
     LC_API void FileObserver::setRootPath(const std::filesystem::path& rootPath)
@@ -130,7 +132,7 @@ namespace lc
         if(m_nMaxSizeMB == 0)
             return false;
 
-        if(!eutil::fioc::FileExists(m_activeFilePath.string().c_str()))
+        if(!util::FileExist(m_activeFilePath.string().c_str()))
             return false;
 
         return std::filesystem::file_size(m_activeFilePath) >= m_nMaxSizeMB * 1024 * 1024;
@@ -144,7 +146,7 @@ namespace lc
         if(!hasActiveFileMaxSizeReached())
             return;
 
-        fclose(m_currentFile);
+        ::fclose(m_currentFile);
         m_currentFile = nullptr;
 
         if(m_files.size() >= m_nMaxFiles)
@@ -154,12 +156,12 @@ namespace lc
         }
 
         std::string fileName = "log";
-        fileName.append(eutil::getCurrentTime("%Y%m%d_%H%M%S"));
+        fileName.append(util::getCurrentTime("%Y%m%d_%H%M%S"));
         fileName.append(".log");
         m_activeFilePath = m_rootPath / fileName;
 
         m_files.push_back(m_activeFilePath.string());
-        eutil::fioc::CreateFile(m_activeFilePath);
-        fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
+        util::CreateNewFile(m_activeFilePath);
+        ::fopen_s(&m_currentFile, m_activeFilePath.string().c_str(), "a");
     }
 }

@@ -1,7 +1,7 @@
 #include "write.hpp"
 
 #include <sstream>
-#include <util.hpp>
+#include <eutil/time/Time.hpp>
 #include <print>
 #include "logConfig.hpp"
 #include "logcraftConfig.hpp"
@@ -23,7 +23,7 @@ namespace lc::internal
         if(config.m_bColorTime && !fileMode)
             buffer.sputn(config.m_sColorTime.data(), config.m_sColorTime.size());
 
-        auto time = eutil::getCurrentTime(config.m_sLogTimeFormat);
+        auto time = util::getCurrentTime(config.m_sLogTimeFormat);
         buffer.sputn(time.data(), time.size());
 
         if(config.m_bColorTime && !fileMode)
@@ -47,7 +47,7 @@ namespace lc::internal
         if(config.m_bColorDate && !fileMode)
             buffer.sputn(config.m_sColorDate.data(), config.m_sColorDate.size());
 
-        auto date = eutil::getCurrentTime(config.m_sLogDateFormat);
+        auto date = util::getCurrentTime(config.m_sLogDateFormat);
         buffer.sputn(date.data(), date.size());
 
         if(config.m_bColorDate && !fileMode)

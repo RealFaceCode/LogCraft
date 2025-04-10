@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.10)
 set(PROJECT_NAME LogCraft)
 project(${PROJECT_NAME} VERSION 0.1.0 LANGUAGES C CXX)
 
@@ -61,7 +61,7 @@ if(NOT TARGET ${PROJECT_NAME})
     target_link_libraries(${PROJECT_NAME} PRIVATE eUtil)
     target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23)
     target_include_directories(${PROJECT_NAME} PUBLIC libBuild/hdr)
-    target_include_directories(${PROJECT_NAME} PUBLIC thirdparty/eutil/libBuild/hdr)
+    target_include_directories(${PROJECT_NAME} PUBLIC thirdparty/eutil/libBuild/include)
     target_compile_definitions(${PROJECT_NAME} PRIVATE LOGCRAFT_EXPORTS)
 endif()
 
