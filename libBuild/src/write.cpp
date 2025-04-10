@@ -1,11 +1,12 @@
-#include "write.hpp"
+#include "logcraft/write.hpp"
 
 #include <sstream>
 #include <eutil/time/Time.hpp>
 #include <print>
-#include "logConfig.hpp"
-#include "logcraftConfig.hpp"
-#include "backtrace.hpp"
+
+#include "logcraft/logConfig.hpp"
+#include "logcraft/logcraftConfig.hpp"
+#include "logcraft/backtrace.hpp"
 
 namespace lc::internal
 {

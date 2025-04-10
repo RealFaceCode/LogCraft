@@ -1,4 +1,4 @@
-#include "logcraftConfig.hpp"
+#include "logcraft/logcraftConfig.hpp"
 
 namespace lc
 {

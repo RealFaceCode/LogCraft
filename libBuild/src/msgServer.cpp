@@ -1,10 +1,10 @@
-#include "msgServer.hpp"
+#include "logcraft/msgServer.hpp"
 
 #include <memory>
 
-#include "write.hpp"
-#include "logConfig.hpp"
-#include "logcraftConfig.hpp"
+#include "logcraft/write.hpp"
+#include "logcraft/logConfig.hpp"
+#include "logcraft/logcraftConfig.hpp"
 
 namespace lc
 {

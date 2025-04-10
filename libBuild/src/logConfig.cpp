@@ -1,10 +1,10 @@
-#include "logConfig.hpp"
+#include "logcraft/logConfig.hpp"
 
 #include <unordered_map>
 #include <ranges>
 #include <algorithm>
 
-#include "logcraftConfig.hpp"
+#include "logcraft/logcraftConfig.hpp"
 namespace lc
 {
     std::unordered_map<std::string, internal::LogConfig> g_logConfigMap;

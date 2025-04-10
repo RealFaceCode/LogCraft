@@ -1,9 +1,9 @@
-#include "lc.hpp"
-#include "logConfig.hpp"
-#include "logcraftConfig.hpp"
-#include "logColor.hpp"
-#include "msgServer.hpp"
-#include "fileObserver.hpp"
+#include "logcraft/lc.hpp"
+#include "logcraft/logConfig.hpp"
+#include "logcraft/logcraftConfig.hpp"
+#include "logcraft/logColor.hpp"
+#include "logcraft/msgServer.hpp"
+#include "logcraft/fileObserver.hpp"
 
 namespace lc
 {
